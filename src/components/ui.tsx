@@ -39,9 +39,9 @@ export function Logo({ size = 34 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 40 40" aria-hidden>
       <rect x="4" y="3" width="30" height="34" rx="5" fill="#fff" />
       <rect x="4" y="3" width="6" height="34" rx="3" fill="#f2b630" />
-      <path d="M14 28 C18 27, 20 20, 24 17 S30 12, 31 11" fill="none" stroke="#1e5f8c" strokeWidth="2.6" strokeLinecap="round" />
-      <circle cx="14" cy="28" r="2.2" fill="#1e5f8c" />
-      <circle cx="31" cy="11" r="2.2" fill="#1e5f8c" />
+      <path d="M14 28 C18 27, 20 20, 24 17 S30 12, 31 11" fill="none" style={{ stroke: 'var(--blue)' }} strokeWidth="2.6" strokeLinecap="round" />
+      <circle cx="14" cy="28" r="2.2" style={{ fill: 'var(--blue)' }} />
+      <circle cx="31" cy="11" r="2.2" style={{ fill: 'var(--blue)' }} />
     </svg>
   )
 }

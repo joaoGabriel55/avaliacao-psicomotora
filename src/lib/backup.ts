@@ -37,6 +37,7 @@ const config = z.object({
   registro: z.string(),
   contato: z.string(),
   logo: z.string().optional(),
+  corTema: z.string().regex(/^#[0-9a-f]{6}$/i).optional(),
   concluidasNoUltimoBackup: z.number().int().default(0),
 })
 

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { ImageUp, Trash2 } from 'lucide-react'
+import { Check, ImageUp, Palette, Trash2 } from 'lucide-react'
 import { lerConfig, salvarConfig } from '../lib/db'
 import type { Configuracoes } from '../lib/domain'
 import { avisar } from '../components/ui'
+import { COR_PADRAO, TEMAS, corSegura } from '../lib/tema'
 
 /** Downscale the logo so the PDF and backup stay small. */
 async function reduzirImagem(f: File, max = 600): Promise<string> {
@@ -23,6 +24,10 @@ export default function Config() {
   if (!c) return null
 
   const set = (p: Partial<Configuracoes>) => setC({ ...c, ...p })
+  // Colour applies at once (App re-themes from the DB), so the picker is its own preview.
+  const setCor = (corTema: string) => { set({ corTema }); salvarConfig({ corTema }) }
+  const cor = c.corTema ?? COR_PADRAO
+  const personalizada = !TEMAS.some((t) => t.cor === cor)
 
   return (
     <div className="page page-narrow">
@@ -56,6 +61,25 @@ export default function Config() {
             {c.logo && <button type="button" className="btn btn-sm btn-ghost btn-danger" onClick={() => set({ logo: undefined })}><Trash2 size={16} /> Remover</button>}
           </div>
           {erro && <p className="error-text" role="alert">{erro}</p>}
+        </div>
+        <div className="field" style={{ marginTop: 18 }}>
+          <span className="label" id="tema-label">Cor do tema</span>
+          <p className="hint">Usada no app e no relatório em PDF.</p>
+          <div className="swatches" role="radiogroup" aria-labelledby="tema-label">
+            {TEMAS.map((t) => (
+              <button key={t.cor} type="button" role="radio" aria-checked={cor === t.cor} className="swatch" onClick={() => setCor(t.cor)}>
+                <span className="swatch-dot" style={{ background: t.cor }}>{cor === t.cor && <Check size={18} />}</span>{t.nome}
+              </button>
+            ))}
+            <label className="swatch" data-on={personalizada}>
+              <span className="swatch-dot" style={{ background: personalizada ? cor : 'conic-gradient(#a33a66, #a3472a, #2f6b3a, #1d6b6b, #1e5f8c, #5b4391, #a33a66)' }}>
+                {personalizada ? <Check size={18} /> : <Palette size={18} />}
+              </span>
+              Personalizada
+              <input type="color" className="visually-hidden" aria-label="Escolher cor personalizada" value={cor} onChange={(e) => setCor(corSegura(e.target.value))} />
+            </label>
+          </div>
+          {personalizada && <p className="hint">Cores claras são escurecidas automaticamente para o texto branco continuar legível.</p>}
         </div>
         <div className="form-actions"><button className="btn btn-primary" type="submit">Salvar</button></div>
       </form>

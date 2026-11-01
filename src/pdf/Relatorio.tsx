@@ -1,37 +1,36 @@
 import { Document, Image, Page, StyleSheet, Svg, Circle, Path, Text, View, pdf } from '@react-pdf/renderer'
+import { paleta } from '../lib/tema'
 import { DOMINIOS, RESPOSTAS, faixaPorId, formatarData, formatarIdade, hoje, idadeEmMeses, maiorAvanco, pontuar, type Avaliacao, type Configuracoes, type Paciente, type Resposta } from '../lib/domain'
 
-const BLUE = '#1E5F8C'
 const INK = '#1B2B36'
 const INK2 = '#4B5E6C'
 const LINE = '#D6E2EA'
-const WASH = '#EEF4F8'
 const OK = '#24804F'
 const DEV = '#B07A00'
 const NO = '#B0473A'
 
-const s = StyleSheet.create({
+const base = StyleSheet.create({
   page: { paddingTop: 48, paddingBottom: 64, paddingHorizontal: 48, fontFamily: 'Helvetica', fontSize: 10.5, color: INK, lineHeight: 1.45 },
   h1: { fontSize: 22, fontFamily: 'Helvetica-Bold', color: INK, marginBottom: 12, lineHeight: 1.2 },
-  h2: { fontSize: 13, fontFamily: 'Helvetica-Bold', color: BLUE, marginTop: 14, marginBottom: 6 },
+  h2: { fontSize: 13, fontFamily: 'Helvetica-Bold', marginTop: 14, marginBottom: 6 },
   lead: { fontSize: 11.5, color: INK2, marginBottom: 14 },
   p: { marginBottom: 6 },
   footer: { position: 'absolute', bottom: 28, left: 48, right: 48, flexDirection: 'row', justifyContent: 'space-between', fontSize: 8.5, color: INK2, borderTopWidth: 0.75, borderTopColor: LINE, paddingTop: 6 },
-  coverBand: { backgroundColor: BLUE, marginHorizontal: -48, marginTop: -48, paddingHorizontal: 48, paddingTop: 56, paddingBottom: 36, color: '#fff' },
-  coverTitle: { fontSize: 12, color: '#CFE2F0', fontFamily: 'Helvetica-Bold', marginBottom: 10 },
+  coverBand: { marginHorizontal: -48, marginTop: -48, paddingHorizontal: 48, paddingTop: 56, paddingBottom: 36, color: '#fff' },
+  coverTitle: { fontSize: 12, fontFamily: 'Helvetica-Bold', marginBottom: 10 },
   coverName: { fontSize: 30, fontFamily: 'Helvetica-Bold', color: '#fff', lineHeight: 1.15 },
   idgrid: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 28, borderWidth: 0.75, borderColor: LINE, borderRadius: 6 },
   idcell: { width: '50%', padding: 12, borderBottomWidth: 0.75, borderBottomColor: LINE },
   idlabel: { fontSize: 8.5, color: INK2, fontFamily: 'Helvetica-Bold', marginBottom: 2 },
   idvalue: { fontSize: 12.5, fontFamily: 'Helvetica-Bold' },
-  box: { backgroundColor: WASH, borderRadius: 6, padding: 12, marginTop: 8 },
+  box: { borderRadius: 6, padding: 12, marginTop: 8 },
   legendRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
   table: { borderWidth: 0.75, borderColor: LINE, borderRadius: 4, marginBottom: 12 },
   tr: { flexDirection: 'row', borderTopWidth: 0.75, borderTopColor: LINE, minHeight: 22, alignItems: 'center' },
   th: { fontFamily: 'Helvetica-Bold', fontSize: 8.5, color: INK2 },
   tdItem: { flex: 1, paddingVertical: 4, paddingHorizontal: 6, fontSize: 9.5 },
   tdCell: { width: 78, paddingVertical: 4, paddingHorizontal: 4, flexDirection: 'row', alignItems: 'center', fontSize: 8.5 },
-  domHead: { flexDirection: 'row', alignItems: 'center', backgroundColor: WASH, paddingVertical: 5, paddingHorizontal: 6 },
+  domHead: { flexDirection: 'row', alignItems: 'center', paddingVertical: 5, paddingHorizontal: 6 },
   chart: { width: '100%', marginTop: 4 },
 })
 
@@ -53,7 +52,7 @@ const curto = (v: Resposta | undefined) => (v === undefined ? '—' : RESPOSTAS.
 
 function Rodape({ emissao }: { emissao: string }) {
   return (
-    <View style={s.footer} fixed>
+    <View style={base.footer} fixed>
       <Text>Avaliação Psicomotora · emitido em {emissao}</Text>
       <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
     </View>
@@ -74,6 +73,15 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
   const anteriores = avaliacoes.slice(0, -1).slice(-3) // up to 3 earlier columns fit A4
   const faixa = faixaPorId(ultima.faixa)
   const nBarras = Math.min(avaliacoes.length, 4)
+  const p = paleta(config.corTema)
+  const s = {
+    ...base,
+    h2: { ...base.h2, color: p.base },
+    coverBand: { ...base.coverBand, backgroundColor: p.base },
+    coverTitle: { ...base.coverTitle, color: p.suave },
+    box: { ...base.box, backgroundColor: p.wash },
+    domHead: { ...base.domHead, backgroundColor: p.wash },
+  }
 
   return (
     <Document title={`Relatório — ${paciente.nome}`} author={config.nomeTerapeuta || undefined} language="pt-BR">
