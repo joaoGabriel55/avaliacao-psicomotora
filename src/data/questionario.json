@@ -1,0 +1,675 @@
+{
+  "versao": 1,
+  "faixas": [
+    {
+      "id": "A",
+      "rotulo": "0 a 2 anos",
+      "idadeMinMeses": 0,
+      "idadeMaxMeses": 23,
+      "itens": [
+        {
+          "codigo": "A-MF-1",
+          "dominio": "MF",
+          "texto": "Segura um objeto colocado na mão"
+        },
+        {
+          "codigo": "A-MF-2",
+          "dominio": "MF",
+          "texto": "Passa um objeto de uma mão para a outra"
+        },
+        {
+          "codigo": "A-MF-3",
+          "dominio": "MF",
+          "texto": "Pega objetos pequenos em pinça (polegar e indicador)"
+        },
+        {
+          "codigo": "A-MF-4",
+          "dominio": "MF",
+          "texto": "Coloca objetos dentro de um recipiente"
+        },
+        {
+          "codigo": "A-MG-1",
+          "dominio": "MG",
+          "texto": "Sustenta a cabeça"
+        },
+        {
+          "codigo": "A-MG-2",
+          "dominio": "MG",
+          "texto": "Senta sem apoio"
+        },
+        {
+          "codigo": "A-MG-3",
+          "dominio": "MG",
+          "texto": "Fica em pé com apoio"
+        },
+        {
+          "codigo": "A-MG-4",
+          "dominio": "MG",
+          "texto": "Anda sem apoio"
+        },
+        {
+          "codigo": "A-EE-1",
+          "dominio": "EE",
+          "texto": "Mantém-se sentado sem apoio por 30 segundos"
+        },
+        {
+          "codigo": "A-EE-2",
+          "dominio": "EE",
+          "texto": "Fica em pé sem apoio por alguns segundos"
+        },
+        {
+          "codigo": "A-EE-3",
+          "dominio": "EE",
+          "texto": "Agacha e volta a ficar em pé sem apoio"
+        },
+        {
+          "codigo": "A-ED-1",
+          "dominio": "ED",
+          "texto": "Anda vários passos sem cair"
+        },
+        {
+          "codigo": "A-ED-2",
+          "dominio": "ED",
+          "texto": "Anda de lado segurando nos móveis"
+        },
+        {
+          "codigo": "A-ED-3",
+          "dominio": "ED",
+          "texto": "Anda puxando ou carregando um brinquedo"
+        },
+        {
+          "codigo": "A-EN-1",
+          "dominio": "EN",
+          "texto": "Rola de barriga para cima e para baixo"
+        },
+        {
+          "codigo": "A-EN-2",
+          "dominio": "EN",
+          "texto": "Rasteja ou arrasta-se para alcançar algo"
+        },
+        {
+          "codigo": "A-EN-3",
+          "dominio": "EN",
+          "texto": "Engatinha em padrão cruzado (braço e perna opostos)"
+        },
+        {
+          "codigo": "A-ES-1",
+          "dominio": "ES",
+          "texto": "Sobe em sofá ou degrau baixo engatinhando"
+        },
+        {
+          "codigo": "A-ES-2",
+          "dominio": "ES",
+          "texto": "Desce do sofá de costas, com segurança"
+        },
+        {
+          "codigo": "A-LA-1",
+          "dominio": "LA",
+          "texto": "Explora objetos com as duas mãos"
+        },
+        {
+          "codigo": "A-LA-2",
+          "dominio": "LA",
+          "texto": "Bate um objeto no outro, um em cada mão"
+        },
+        {
+          "codigo": "A-LA-3",
+          "dominio": "LA",
+          "texto": "Alcança um objeto cruzando a linha média do corpo"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "rotulo": "2 a 4 anos",
+      "idadeMinMeses": 24,
+      "idadeMaxMeses": 47,
+      "itens": [
+        {
+          "codigo": "B-MF-1",
+          "dominio": "MF",
+          "texto": "Empilha 4 ou mais blocos"
+        },
+        {
+          "codigo": "B-MF-2",
+          "dominio": "MF",
+          "texto": "Imita um traço vertical"
+        },
+        {
+          "codigo": "B-MF-3",
+          "dominio": "MF",
+          "texto": "Vira páginas de livro uma a uma"
+        },
+        {
+          "codigo": "B-MF-4",
+          "dominio": "MF",
+          "texto": "Encaixa peças simples"
+        },
+        {
+          "codigo": "B-MG-1",
+          "dominio": "MG",
+          "texto": "Corre sem cair"
+        },
+        {
+          "codigo": "B-MG-2",
+          "dominio": "MG",
+          "texto": "Chuta uma bola parada"
+        },
+        {
+          "codigo": "B-MG-3",
+          "dominio": "MG",
+          "texto": "Arremessa a bola por cima do ombro"
+        },
+        {
+          "codigo": "B-MG-4",
+          "dominio": "MG",
+          "texto": "Pula com os dois pés juntos"
+        },
+        {
+          "codigo": "B-MG-5",
+          "dominio": "MG",
+          "texto": "Sobe escadas alternando os pés, com apoio"
+        },
+        {
+          "codigo": "B-EE-1",
+          "dominio": "EE",
+          "texto": "Fica em um pé só por 1 a 2 segundos"
+        },
+        {
+          "codigo": "B-EE-2",
+          "dominio": "EE",
+          "texto": "Faz \"estátua\" por 3 segundos"
+        },
+        {
+          "codigo": "B-ED-1",
+          "dominio": "ED",
+          "texto": "Anda na ponta dos pés"
+        },
+        {
+          "codigo": "B-ED-2",
+          "dominio": "ED",
+          "texto": "Anda sobre uma linha no chão"
+        },
+        {
+          "codigo": "B-ED-3",
+          "dominio": "ED",
+          "texto": "Anda para trás"
+        },
+        {
+          "codigo": "B-ED-4",
+          "dominio": "ED",
+          "texto": "Dá um pulo com um pé só"
+        },
+        {
+          "codigo": "B-EN-1",
+          "dominio": "EN",
+          "texto": "Engatinha em padrão cruzado"
+        },
+        {
+          "codigo": "B-EN-2",
+          "dominio": "EN",
+          "texto": "Engatinha por baixo de um obstáculo"
+        },
+        {
+          "codigo": "B-EN-3",
+          "dominio": "EN",
+          "texto": "Engatinha sobre superfície irregular (colchão, almofadas)"
+        },
+        {
+          "codigo": "B-ES-1",
+          "dominio": "ES",
+          "texto": "Sobe a escada do escorregador"
+        },
+        {
+          "codigo": "B-ES-2",
+          "dominio": "ES",
+          "texto": "Sobe e desce de móveis com segurança"
+        },
+        {
+          "codigo": "B-LA-1",
+          "dominio": "LA",
+          "texto": "Começa a mostrar preferência por uma das mãos"
+        },
+        {
+          "codigo": "B-LA-2",
+          "dominio": "LA",
+          "texto": "Segura com uma mão e manipula com a outra"
+        },
+        {
+          "codigo": "B-LA-3",
+          "dominio": "LA",
+          "texto": "Cruza a linha média para pegar um objeto"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "rotulo": "4 a 6 anos",
+      "idadeMinMeses": 48,
+      "idadeMaxMeses": 71,
+      "itens": [
+        {
+          "codigo": "C-MF-1",
+          "dominio": "MF",
+          "texto": "Segura o lápis em pinça trípode"
+        },
+        {
+          "codigo": "C-MF-2",
+          "dominio": "MF",
+          "texto": "Copia círculo e cruz"
+        },
+        {
+          "codigo": "C-MF-3",
+          "dominio": "MF",
+          "texto": "Recorta em linha reta"
+        },
+        {
+          "codigo": "C-MF-4",
+          "dominio": "MF",
+          "texto": "Desenha figura humana com 3 ou mais partes"
+        },
+        {
+          "codigo": "C-MF-5",
+          "dominio": "MF",
+          "texto": "Abotoa botões grandes"
+        },
+        {
+          "codigo": "C-MG-1",
+          "dominio": "MG",
+          "texto": "Pega uma bola grande com as mãos"
+        },
+        {
+          "codigo": "C-MG-2",
+          "dominio": "MG",
+          "texto": "Chuta uma bola em movimento"
+        },
+        {
+          "codigo": "C-MG-3",
+          "dominio": "MG",
+          "texto": "Sobe e desce escadas alternando os pés, sem apoio"
+        },
+        {
+          "codigo": "C-MG-4",
+          "dominio": "MG",
+          "texto": "Salta um obstáculo baixo com os dois pés"
+        },
+        {
+          "codigo": "C-MG-5",
+          "dominio": "MG",
+          "texto": "Galopa"
+        },
+        {
+          "codigo": "C-EE-1",
+          "dominio": "EE",
+          "texto": "Fica em um pé por 5 segundos (cada pé)"
+        },
+        {
+          "codigo": "C-EE-2",
+          "dominio": "EE",
+          "texto": "Fica de pés juntos e olhos fechados por 10 segundos"
+        },
+        {
+          "codigo": "C-EE-3",
+          "dominio": "EE",
+          "texto": "Faz \"estátua\" por 10 segundos"
+        },
+        {
+          "codigo": "C-ED-1",
+          "dominio": "ED",
+          "texto": "Pula com um pé 5 vezes no lugar (cada pé)"
+        },
+        {
+          "codigo": "C-ED-2",
+          "dominio": "ED",
+          "texto": "Avança pulando em um pé só (3 ou mais saltos)"
+        },
+        {
+          "codigo": "C-ED-3",
+          "dominio": "ED",
+          "texto": "Anda sobre trave ou banco baixo"
+        },
+        {
+          "codigo": "C-ED-4",
+          "dominio": "ED",
+          "texto": "Anda calcanhar-ponta sobre uma linha"
+        },
+        {
+          "codigo": "C-ED-5",
+          "dominio": "ED",
+          "texto": "Para ao comando sem perder o equilíbrio"
+        },
+        {
+          "codigo": "C-EN-1",
+          "dominio": "EN",
+          "texto": "Engatinha em padrão cruzado, com ritmo"
+        },
+        {
+          "codigo": "C-EN-2",
+          "dominio": "EN",
+          "texto": "Rasteja de barriga no chão em padrão cruzado"
+        },
+        {
+          "codigo": "C-EN-3",
+          "dominio": "EN",
+          "texto": "Engatinha em circuito com obstáculos"
+        },
+        {
+          "codigo": "C-ES-1",
+          "dominio": "ES",
+          "texto": "Sobe no trepa-trepa"
+        },
+        {
+          "codigo": "C-ES-2",
+          "dominio": "ES",
+          "texto": "Sobe uma escada vertical de parquinho"
+        },
+        {
+          "codigo": "C-ES-3",
+          "dominio": "ES",
+          "texto": "Desce com segurança e controle"
+        },
+        {
+          "codigo": "C-LA-1",
+          "dominio": "LA",
+          "texto": "Tem preferência manual consistente"
+        },
+        {
+          "codigo": "C-LA-2",
+          "dominio": "LA",
+          "texto": "Tem preferência de pé consistente (chutar, pular)"
+        },
+        {
+          "codigo": "C-LA-3",
+          "dominio": "LA",
+          "texto": "Cruza a linha média com facilidade"
+        },
+        {
+          "codigo": "C-LA-4",
+          "dominio": "LA",
+          "texto": "Identifica direita e esquerda no próprio corpo"
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "rotulo": "6 a 9 anos",
+      "idadeMinMeses": 72,
+      "idadeMaxMeses": 107,
+      "itens": [
+        {
+          "codigo": "D-MF-1",
+          "dominio": "MF",
+          "texto": "Recorta formas curvas"
+        },
+        {
+          "codigo": "D-MF-2",
+          "dominio": "MF",
+          "texto": "Escreve letras com tamanho regular"
+        },
+        {
+          "codigo": "D-MF-3",
+          "dominio": "MF",
+          "texto": "Amarra o cadarço"
+        },
+        {
+          "codigo": "D-MF-4",
+          "dominio": "MF",
+          "texto": "Copia um losango"
+        },
+        {
+          "codigo": "D-MF-5",
+          "dominio": "MF",
+          "texto": "Enfia contas pequenas com rapidez"
+        },
+        {
+          "codigo": "D-MG-1",
+          "dominio": "MG",
+          "texto": "Pula corda"
+        },
+        {
+          "codigo": "D-MG-2",
+          "dominio": "MG",
+          "texto": "Quica a bola andando"
+        },
+        {
+          "codigo": "D-MG-3",
+          "dominio": "MG",
+          "texto": "Arremessa com precisão em um alvo"
+        },
+        {
+          "codigo": "D-MG-4",
+          "dominio": "MG",
+          "texto": "Corre em zigue-zague mudando de direção"
+        },
+        {
+          "codigo": "D-MG-5",
+          "dominio": "MG",
+          "texto": "Anda de bicicleta"
+        },
+        {
+          "codigo": "D-EE-1",
+          "dominio": "EE",
+          "texto": "Fica em um pé por 10 segundos (cada pé)"
+        },
+        {
+          "codigo": "D-EE-2",
+          "dominio": "EE",
+          "texto": "Fica em um pé de olhos fechados por 5 segundos"
+        },
+        {
+          "codigo": "D-EE-3",
+          "dominio": "EE",
+          "texto": "Fica na ponta dos pés por 10 segundos"
+        },
+        {
+          "codigo": "D-ED-1",
+          "dominio": "ED",
+          "texto": "Brinca de amarelinha"
+        },
+        {
+          "codigo": "D-ED-2",
+          "dominio": "ED",
+          "texto": "Avança pulando em um pé 10 vezes"
+        },
+        {
+          "codigo": "D-ED-3",
+          "dominio": "ED",
+          "texto": "Anda para trás sobre uma trave"
+        },
+        {
+          "codigo": "D-ED-4",
+          "dominio": "ED",
+          "texto": "Anda sobre trave carregando um objeto"
+        },
+        {
+          "codigo": "D-ED-5",
+          "dominio": "ED",
+          "texto": "Anda calcanhar-ponta para trás"
+        },
+        {
+          "codigo": "D-EN-1",
+          "dominio": "EN",
+          "texto": "Faz quadrupedia em padrão cruzado com velocidade"
+        },
+        {
+          "codigo": "D-EN-2",
+          "dominio": "EN",
+          "texto": "Engatinha para trás de forma coordenada"
+        },
+        {
+          "codigo": "D-EN-3",
+          "dominio": "EN",
+          "texto": "Faz circuito de quadrupedia mudando de direção"
+        },
+        {
+          "codigo": "D-ES-1",
+          "dominio": "ES",
+          "texto": "Sobe em corda com nós ou parede de escalada baixa"
+        },
+        {
+          "codigo": "D-ES-2",
+          "dominio": "ES",
+          "texto": "Passa de um lado ao outro do trepa-trepa"
+        },
+        {
+          "codigo": "D-ES-3",
+          "dominio": "ES",
+          "texto": "Desce com controle"
+        },
+        {
+          "codigo": "D-LA-1",
+          "dominio": "LA",
+          "texto": "Tem preferência de mão, pé e olho definida"
+        },
+        {
+          "codigo": "D-LA-2",
+          "dominio": "LA",
+          "texto": "Identifica direita e esquerda no próprio corpo sem hesitar"
+        },
+        {
+          "codigo": "D-LA-3",
+          "dominio": "LA",
+          "texto": "Identifica direita e esquerda em outra pessoa de frente"
+        },
+        {
+          "codigo": "D-LA-4",
+          "dominio": "LA",
+          "texto": "Executa comandos cruzados (mão direita na orelha esquerda)"
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "rotulo": "9 a 15 anos",
+      "idadeMinMeses": 108,
+      "idadeMaxMeses": 191,
+      "itens": [
+        {
+          "codigo": "E-MF-1",
+          "dominio": "MF",
+          "texto": "Escreve em letra cursiva fluente e legível"
+        },
+        {
+          "codigo": "E-MF-2",
+          "dominio": "MF",
+          "texto": "Usa régua e compasso com precisão"
+        },
+        {
+          "codigo": "E-MF-3",
+          "dominio": "MF",
+          "texto": "Faz dobraduras ou nós com as duas mãos"
+        },
+        {
+          "codigo": "E-MF-4",
+          "dominio": "MF",
+          "texto": "Manipula pequenos objetos com rapidez e precisão"
+        },
+        {
+          "codigo": "E-MG-1",
+          "dominio": "MG",
+          "texto": "Faz um circuito motor com sequência de ações"
+        },
+        {
+          "codigo": "E-MG-2",
+          "dominio": "MG",
+          "texto": "Corre e dribla ou arremessa coordenando os movimentos"
+        },
+        {
+          "codigo": "E-MG-3",
+          "dominio": "MG",
+          "texto": "Salta em distância com impulso dos dois pés"
+        },
+        {
+          "codigo": "E-MG-4",
+          "dominio": "MG",
+          "texto": "Pula corda com variações"
+        },
+        {
+          "codigo": "E-EE-1",
+          "dominio": "EE",
+          "texto": "Fica em um pé de olhos fechados por 10 segundos"
+        },
+        {
+          "codigo": "E-EE-2",
+          "dominio": "EE",
+          "texto": "Mantém a posição de \"avião\" por 10 segundos"
+        },
+        {
+          "codigo": "E-EE-3",
+          "dominio": "EE",
+          "texto": "Fica na ponta dos pés de olhos fechados por 5 segundos"
+        },
+        {
+          "codigo": "E-ED-1",
+          "dominio": "ED",
+          "texto": "Pula em um pé mudando de direção"
+        },
+        {
+          "codigo": "E-ED-2",
+          "dominio": "ED",
+          "texto": "Anda sobre trave estreita para frente e para trás"
+        },
+        {
+          "codigo": "E-ED-3",
+          "dominio": "ED",
+          "texto": "Salta em um pé sobre marcas no chão em sequência"
+        },
+        {
+          "codigo": "E-ED-4",
+          "dominio": "ED",
+          "texto": "Gira 360° e mantém o equilíbrio"
+        },
+        {
+          "codigo": "E-EN-1",
+          "dominio": "EN",
+          "texto": "Faz quadrupedia coordenada em circuito"
+        },
+        {
+          "codigo": "E-EN-2",
+          "dominio": "EN",
+          "texto": "Faz padrão cruzado seguindo um ritmo marcado"
+        },
+        {
+          "codigo": "E-EN-3",
+          "dominio": "EN",
+          "texto": "Faz quadrupedia para trás e de lado"
+        },
+        {
+          "codigo": "E-ES-1",
+          "dominio": "ES",
+          "texto": "Sobe em parede de escalada ou corda"
+        },
+        {
+          "codigo": "E-ES-2",
+          "dominio": "ES",
+          "texto": "Transpõe obstáculos altos (muro baixo, plinto)"
+        },
+        {
+          "codigo": "E-ES-3",
+          "dominio": "ES",
+          "texto": "Desce com controle"
+        },
+        {
+          "codigo": "E-LA-1",
+          "dominio": "LA",
+          "texto": "Orienta-se por direita e esquerda no espaço"
+        },
+        {
+          "codigo": "E-LA-2",
+          "dominio": "LA",
+          "texto": "Identifica direita e esquerda em outra pessoa sem hesitar"
+        },
+        {
+          "codigo": "E-LA-3",
+          "dominio": "LA",
+          "texto": "Executa comandos cruzados rápidos"
+        },
+        {
+          "codigo": "E-LA-4",
+          "dominio": "LA",
+          "texto": "Segue trajetos ou mapas com direita e esquerda"
+        }
+      ]
+    }
+  ]
+}

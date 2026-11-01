@@ -1,0 +1,679 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T02:55:10.452Z",
+  "title": "Design System: Avaliação Psicomotora",
+  "extensions": {
+    "colorMeta": {
+      "blue": {
+        "role": "primary",
+        "displayName": "Caderneta Blue",
+        "canonical": "#1e5f8c",
+        "tonalRamp": [
+          "#0e3350",
+          "#123f5e",
+          "#154a6e",
+          "#1e5f8c",
+          "#5a8fb5",
+          "#b8d3e6",
+          "#e3eef5",
+          "#eef4f8"
+        ]
+      },
+      "blue-deep": {
+        "role": "primary",
+        "displayName": "Spine Blue",
+        "canonical": "#154a6e",
+        "tonalRamp": [
+          "#0e3350",
+          "#123f5e",
+          "#154a6e",
+          "#1e5f8c",
+          "#5a8fb5",
+          "#b8d3e6",
+          "#e3eef5",
+          "#eef4f8"
+        ]
+      },
+      "blue-ink": {
+        "role": "primary",
+        "displayName": "Cover Ink",
+        "canonical": "#123f5e",
+        "tonalRamp": [
+          "#0e3350",
+          "#123f5e",
+          "#154a6e",
+          "#1e5f8c",
+          "#5a8fb5",
+          "#b8d3e6",
+          "#e3eef5",
+          "#eef4f8"
+        ]
+      },
+      "blue-tint": {
+        "role": "primary",
+        "displayName": "Blue Tint",
+        "canonical": "#e3eef5",
+        "tonalRamp": [
+          "#0e3350",
+          "#123f5e",
+          "#154a6e",
+          "#1e5f8c",
+          "#5a8fb5",
+          "#b8d3e6",
+          "#e3eef5",
+          "#eef4f8"
+        ]
+      },
+      "blue-wash": {
+        "role": "primary",
+        "displayName": "Blue Wash",
+        "canonical": "#eef4f8",
+        "tonalRamp": [
+          "#0e3350",
+          "#123f5e",
+          "#154a6e",
+          "#1e5f8c",
+          "#5a8fb5",
+          "#b8d3e6",
+          "#e3eef5",
+          "#eef4f8"
+        ]
+      },
+      "sun": {
+        "role": "secondary",
+        "displayName": "Sun",
+        "canonical": "#f2b630",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 82.2)",
+          "oklch(26.4% 0.116 82.2)",
+          "oklch(37.9% 0.154 82.2)",
+          "oklch(49.3% 0.154 82.2)",
+          "oklch(60.7% 0.154 82.2)",
+          "oklch(72.1% 0.121 82.2)",
+          "oklch(83.6% 0.076 82.2)",
+          "oklch(95.0% 0.030 82.2)"
+        ]
+      },
+      "sun-ink": {
+        "role": "secondary",
+        "displayName": "Sun Ink",
+        "canonical": "#3b2a00",
+        "tonalRamp": [
+          "oklch(15.0% 0.061 84.8)",
+          "oklch(26.4% 0.061 84.8)",
+          "oklch(37.9% 0.061 84.8)",
+          "oklch(49.3% 0.061 84.8)",
+          "oklch(60.7% 0.061 84.8)",
+          "oklch(72.1% 0.061 84.8)",
+          "oklch(83.6% 0.061 84.8)",
+          "oklch(95.0% 0.030 84.8)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#f3f7fa",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 239.8)",
+          "oklch(26.4% 0.006 239.8)",
+          "oklch(37.9% 0.006 239.8)",
+          "oklch(49.3% 0.006 239.8)",
+          "oklch(60.7% 0.006 239.8)",
+          "oklch(72.1% 0.006 239.8)",
+          "oklch(83.6% 0.006 239.8)",
+          "oklch(95.0% 0.006 239.8)"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 89.9)",
+          "oklch(26.4% 0.000 89.9)",
+          "oklch(37.9% 0.000 89.9)",
+          "oklch(49.3% 0.000 89.9)",
+          "oklch(60.7% 0.000 89.9)",
+          "oklch(72.1% 0.000 89.9)",
+          "oklch(83.6% 0.000 89.9)",
+          "oklch(95.0% 0.000 89.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1b2b36",
+        "tonalRamp": [
+          "oklch(15.0% 0.030 239.2)",
+          "oklch(26.4% 0.030 239.2)",
+          "oklch(37.9% 0.030 239.2)",
+          "oklch(49.3% 0.030 239.2)",
+          "oklch(60.7% 0.030 239.2)",
+          "oklch(72.1% 0.030 239.2)",
+          "oklch(83.6% 0.030 239.2)",
+          "oklch(95.0% 0.030 239.2)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "#4b5e6c",
+        "tonalRamp": [
+          "oklch(15.0% 0.032 240.3)",
+          "oklch(26.4% 0.032 240.3)",
+          "oklch(37.9% 0.032 240.3)",
+          "oklch(49.3% 0.032 240.3)",
+          "oklch(60.7% 0.032 240.3)",
+          "oklch(72.1% 0.032 240.3)",
+          "oklch(83.6% 0.032 240.3)",
+          "oklch(95.0% 0.030 240.3)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "canonical": "#5c6e7b",
+        "tonalRamp": [
+          "oklch(15.0% 0.029 239.4)",
+          "oklch(26.4% 0.029 239.4)",
+          "oklch(37.9% 0.029 239.4)",
+          "oklch(49.3% 0.029 239.4)",
+          "oklch(60.7% 0.029 239.4)",
+          "oklch(72.1% 0.029 239.4)",
+          "oklch(83.6% 0.029 239.4)",
+          "oklch(95.0% 0.029 239.4)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#d6e2ea",
+        "tonalRamp": [
+          "oklch(15.0% 0.017 236.7)",
+          "oklch(26.4% 0.017 236.7)",
+          "oklch(37.9% 0.017 236.7)",
+          "oklch(49.3% 0.017 236.7)",
+          "oklch(60.7% 0.017 236.7)",
+          "oklch(72.1% 0.017 236.7)",
+          "oklch(83.6% 0.017 236.7)",
+          "oklch(95.0% 0.017 236.7)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Line Strong",
+        "canonical": "#b9cbd7",
+        "tonalRamp": [
+          "oklch(15.0% 0.026 236.9)",
+          "oklch(26.4% 0.026 236.9)",
+          "oklch(37.9% 0.026 236.9)",
+          "oklch(49.3% 0.026 236.9)",
+          "oklch(60.7% 0.026 236.9)",
+          "oklch(72.1% 0.026 236.9)",
+          "oklch(83.6% 0.026 236.9)",
+          "oklch(95.0% 0.026 236.9)"
+        ]
+      },
+      "ok": {
+        "role": "tertiary",
+        "displayName": "Realiza Green",
+        "canonical": "#24804f",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 155.4)",
+          "oklch(26.4% 0.115 155.4)",
+          "oklch(37.9% 0.115 155.4)",
+          "oklch(49.3% 0.115 155.4)",
+          "oklch(60.7% 0.115 155.4)",
+          "oklch(72.1% 0.115 155.4)",
+          "oklch(83.6% 0.076 155.4)",
+          "oklch(95.0% 0.030 155.4)"
+        ]
+      },
+      "ok-tint": {
+        "role": "tertiary",
+        "displayName": "Realiza Tint",
+        "canonical": "#e2f2e8",
+        "tonalRamp": [
+          "oklch(15.0% 0.021 158.6)",
+          "oklch(26.4% 0.021 158.6)",
+          "oklch(37.9% 0.021 158.6)",
+          "oklch(49.3% 0.021 158.6)",
+          "oklch(60.7% 0.021 158.6)",
+          "oklch(72.1% 0.021 158.6)",
+          "oklch(83.6% 0.021 158.6)",
+          "oklch(95.0% 0.021 158.6)"
+        ]
+      },
+      "dev": {
+        "role": "tertiary",
+        "displayName": "Development Amber",
+        "canonical": "#b07a00",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 77.7)",
+          "oklch(26.4% 0.116 77.7)",
+          "oklch(37.9% 0.129 77.7)",
+          "oklch(49.3% 0.129 77.7)",
+          "oklch(60.7% 0.129 77.7)",
+          "oklch(72.1% 0.121 77.7)",
+          "oklch(83.6% 0.076 77.7)",
+          "oklch(95.0% 0.030 77.7)"
+        ]
+      },
+      "dev-ink": {
+        "role": "tertiary",
+        "displayName": "Development Ink",
+        "canonical": "#7d5700",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 79.2)",
+          "oklch(26.4% 0.101 79.2)",
+          "oklch(37.9% 0.101 79.2)",
+          "oklch(49.3% 0.101 79.2)",
+          "oklch(60.7% 0.101 79.2)",
+          "oklch(72.1% 0.101 79.2)",
+          "oklch(83.6% 0.076 79.2)",
+          "oklch(95.0% 0.030 79.2)"
+        ]
+      },
+      "dev-tint": {
+        "role": "tertiary",
+        "displayName": "Development Tint",
+        "canonical": "#fbf0d2",
+        "tonalRamp": [
+          "oklch(15.0% 0.041 90.2)",
+          "oklch(26.4% 0.041 90.2)",
+          "oklch(37.9% 0.041 90.2)",
+          "oklch(49.3% 0.041 90.2)",
+          "oklch(60.7% 0.041 90.2)",
+          "oklch(72.1% 0.041 90.2)",
+          "oklch(83.6% 0.041 90.2)",
+          "oklch(95.0% 0.030 90.2)"
+        ]
+      },
+      "no": {
+        "role": "tertiary",
+        "displayName": "Não-realiza Brick",
+        "canonical": "#b0473a",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 29.5)",
+          "oklch(26.4% 0.116 29.5)",
+          "oklch(37.9% 0.140 29.5)",
+          "oklch(49.3% 0.140 29.5)",
+          "oklch(60.7% 0.140 29.5)",
+          "oklch(72.1% 0.121 29.5)",
+          "oklch(83.6% 0.076 29.5)",
+          "oklch(95.0% 0.030 29.5)"
+        ]
+      },
+      "no-tint": {
+        "role": "tertiary",
+        "displayName": "Não-realiza Tint",
+        "canonical": "#f8e6e2",
+        "tonalRamp": [
+          "oklch(15.0% 0.020 32.5)",
+          "oklch(26.4% 0.020 32.5)",
+          "oklch(37.9% 0.020 32.5)",
+          "oklch(49.3% 0.020 32.5)",
+          "oklch(60.7% 0.020 32.5)",
+          "oklch(72.1% 0.020 32.5)",
+          "oklch(83.6% 0.020 32.5)",
+          "oklch(95.0% 0.020 32.5)"
+        ]
+      },
+      "domain-mf": {
+        "role": "data",
+        "displayName": "Motricidade fina",
+        "canonical": "#2f7fc1",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 247.4)",
+          "oklch(26.4% 0.116 247.4)",
+          "oklch(37.9% 0.127 247.4)",
+          "oklch(49.3% 0.127 247.4)",
+          "oklch(60.7% 0.127 247.4)",
+          "oklch(72.1% 0.121 247.4)",
+          "oklch(83.6% 0.076 247.4)",
+          "oklch(95.0% 0.030 247.4)"
+        ]
+      },
+      "domain-mg": {
+        "role": "data",
+        "displayName": "Motricidade grossa",
+        "canonical": "#d2513c",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 31.6)",
+          "oklch(26.4% 0.116 31.6)",
+          "oklch(37.9% 0.161 31.6)",
+          "oklch(49.3% 0.167 31.6)",
+          "oklch(60.7% 0.167 31.6)",
+          "oklch(72.1% 0.121 31.6)",
+          "oklch(83.6% 0.076 31.6)",
+          "oklch(95.0% 0.030 31.6)"
+        ]
+      },
+      "domain-ee": {
+        "role": "data",
+        "displayName": "Equilíbrio estático",
+        "canonical": "#2e9467",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 160.2)",
+          "oklch(26.4% 0.116 160.2)",
+          "oklch(37.9% 0.116 160.2)",
+          "oklch(49.3% 0.116 160.2)",
+          "oklch(60.7% 0.116 160.2)",
+          "oklch(72.1% 0.116 160.2)",
+          "oklch(83.6% 0.076 160.2)",
+          "oklch(95.0% 0.030 160.2)"
+        ]
+      },
+      "domain-ed": {
+        "role": "data",
+        "displayName": "Equilíbrio dinâmico",
+        "canonical": "#c58a00",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 78.4)",
+          "oklch(26.4% 0.116 78.4)",
+          "oklch(37.9% 0.140 78.4)",
+          "oklch(49.3% 0.140 78.4)",
+          "oklch(60.7% 0.140 78.4)",
+          "oklch(72.1% 0.121 78.4)",
+          "oklch(83.6% 0.076 78.4)",
+          "oklch(95.0% 0.030 78.4)"
+        ]
+      },
+      "domain-en": {
+        "role": "data",
+        "displayName": "Engatinhar",
+        "canonical": "#8457b5",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 304.1)",
+          "oklch(26.4% 0.116 304.1)",
+          "oklch(37.9% 0.146 304.1)",
+          "oklch(49.3% 0.146 304.1)",
+          "oklch(60.7% 0.146 304.1)",
+          "oklch(72.1% 0.121 304.1)",
+          "oklch(83.6% 0.076 304.1)",
+          "oklch(95.0% 0.030 304.1)"
+        ]
+      },
+      "domain-es": {
+        "role": "data",
+        "displayName": "Escalar",
+        "canonical": "#9c5f2c",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 57.8)",
+          "oklch(26.4% 0.103 57.8)",
+          "oklch(37.9% 0.103 57.8)",
+          "oklch(49.3% 0.103 57.8)",
+          "oklch(60.7% 0.103 57.8)",
+          "oklch(72.1% 0.103 57.8)",
+          "oklch(83.6% 0.076 57.8)",
+          "oklch(95.0% 0.030 57.8)"
+        ]
+      },
+      "domain-la": {
+        "role": "data",
+        "displayName": "Lateralidade",
+        "canonical": "#cc4f8a",
+        "tonalRamp": [
+          "oklch(15.0% 0.070 354.0)",
+          "oklch(26.4% 0.116 354.0)",
+          "oklch(37.9% 0.161 354.0)",
+          "oklch(49.3% 0.169 354.0)",
+          "oklch(60.7% 0.167 354.0)",
+          "oklch(72.1% 0.121 354.0)",
+          "oklch(83.6% 0.076 354.0)",
+          "oklch(95.0% 0.030 354.0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Overall score numeral on the Painel."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One page, cover or domain title per screen (26-36px)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sheet, runner and dialog headings."
+      },
+      "item": {
+        "displayName": "Item",
+        "purpose": "Questionnaire items and patient names, read at arm's length."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text and input text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, buttons, steps."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Item codes, fact labels, counters."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet",
+        "value": "0 1px 2px rgba(18, 63, 94, 0.06), 0 4px 14px rgba(18, 63, 94, 0.06)",
+        "purpose": "Every sheet at rest."
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 4px rgba(18, 63, 94, 0.08), 0 12px 28px rgba(18, 63, 94, 0.12)",
+        "purpose": "Selected age band, dialog, toast."
+      },
+      {
+        "name": "booklet",
+        "value": "0 2px 3px rgba(18, 63, 94, 0.12), 0 10px 24px rgba(18, 63, 94, 0.14)",
+        "purpose": "Booklet cover at rest."
+      },
+      {
+        "name": "booklet-hover",
+        "value": "0 4px 6px rgba(18, 63, 94, 0.12), 0 18px 36px rgba(18, 63, 94, 0.2)",
+        "purpose": "Booklet cover lifted 3px on hover."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 3px rgba(30, 95, 140, 0.18)",
+        "purpose": "Input focus."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Out-expo ease for state transitions."
+      },
+      {
+        "name": "duration-control",
+        "value": "0.15s-0.2s",
+        "purpose": "Buttons, stamps, rows, rail links."
+      },
+      {
+        "name": "duration-lift",
+        "value": "0.25s",
+        "purpose": "Booklet hover, stamp mark scale."
+      },
+      {
+        "name": "progress",
+        "value": "transform 0.4s",
+        "purpose": "Runner progress bar."
+      },
+      {
+        "name": "curve-rise",
+        "value": "900ms easeOutQuart from baseline",
+        "purpose": "Evolution chart first draw."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "All animation and transition collapsed under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "dash-collapse",
+        "value": "1080px"
+      },
+      {
+        "name": "item-stack",
+        "value": "900px"
+      },
+      {
+        "name": "phone",
+        "value": "760px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Caderneta Blue main action.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Salvar paciente</button>",
+      "css": ".ds-btn { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid #b9cbd7; background: #fff; color: #123f5e; font-weight: 800; font-size: 15px; cursor: pointer; transition: background 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s, transform 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { border-color: #1e5f8c; background: #eef4f8; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; } .ds-btn-primary { background: #1e5f8c; border-color: #1e5f8c; color: #fff; box-shadow: 0 1px 2px rgba(18,63,94,0.2); } .ds-btn-primary:hover { background: #154a6e; border-color: #154a6e; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Default white button with Cover Ink label.",
+      "html": "<button class=\"ds-btn\">Relatório PDF</button>",
+      "css": ".ds-btn { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid #b9cbd7; background: #fff; color: #123f5e; font-weight: 800; font-size: 15px; cursor: pointer; transition: background 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s, transform 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { border-color: #1e5f8c; background: #eef4f8; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; }"
+    },
+    {
+      "name": "Sun Button",
+      "kind": "button",
+      "refersTo": "button-sun",
+      "description": "The single urgent action in a view (backup; new assessment on the cover).",
+      "html": "<button class=\"ds-btn ds-btn-sun\">Fazer backup</button>",
+      "css": ".ds-btn { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1px solid #b9cbd7; background: #fff; color: #123f5e; font-weight: 800; font-size: 15px; cursor: pointer; transition: background 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s, transform 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { border-color: #1e5f8c; background: #eef4f8; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; } .ds-btn-sun { background: #f2b630; border-color: #d99e1c; color: #3b2a00; } .ds-btn-sun:hover { background: #f5c24c; border-color: #c48c10; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled 50px field with blue focus halo.",
+      "html": "<label class=\"ds-field\"><span>Nome da criança</span><input class=\"ds-input\" placeholder=\"Nome completo\"></label>",
+      "css": ".ds-field { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: grid; gap: 6px; } .ds-field span { font-weight: 800; font-size: 14px; color: #1b2b36; } .ds-input { font: inherit; width: 100%; min-height: 50px; padding: 12px 14px; border-radius: 10px; border: 1px solid #b9cbd7; background: #fff; font-size: 16px; color: #1b2b36; transition: border-color 0.15s, box-shadow 0.15s; } .ds-input::placeholder { color: #7f909c; } .ds-input:focus { outline: none; border-color: #1e5f8c; box-shadow: 0 0 0 3px rgba(30,95,140,0.18); }"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "rail",
+      "description": "Caderneta Blue rail; active link is a white tab.",
+      "html": "<nav class=\"ds-rail\"><a class=\"ds-rail-a is-active\" href=\"#\">Pacientes</a><a class=\"ds-rail-a\" href=\"#\">Backup</a><a class=\"ds-rail-a\" href=\"#\">Configurações</a></nav>",
+      "css": ".ds-rail { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; width: 232px; background: #1e5f8c; padding: 22px 14px; display: flex; flex-direction: column; gap: 4px; } .ds-rail-a { display: flex; align-items: center; min-height: 48px; padding: 0 14px; color: #dbe9f3; text-decoration: none; font-weight: 700; border-radius: 10px; transition: background 0.2s cubic-bezier(0.16,1,0.3,1), color 0.2s; } .ds-rail-a:hover { background: rgba(255,255,255,0.08); color: #fff; } .ds-rail-a.is-active { background: #fff; color: #123f5e; } .ds-rail-a:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; }"
+    },
+    {
+      "name": "Answer Stamps",
+      "kind": "custom",
+      "refersTo": "stamp",
+      "description": "Three stamped answers per item: shape + word + colour.",
+      "html": "<div class=\"ds-stamps\" role=\"radiogroup\"><button class=\"ds-stamp ds-s2\" role=\"radio\" aria-checked=\"true\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#24804f\"/><path d=\"M7.5 12.5l3 3 6-6.5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Realiza</button><button class=\"ds-stamp ds-s1\" role=\"radio\" aria-checked=\"false\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"#fff\" stroke=\"#b07a00\" stroke-width=\"2\"/><path d=\"M12 3a9 9 0 0 1 0 18z\" fill=\"#b07a00\"/></svg>Em desenvolvimento</button><button class=\"ds-stamp ds-s0\" role=\"radio\" aria-checked=\"false\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"#fff\" stroke=\"#b0473a\" stroke-width=\"2\"/><path d=\"M8 12h8\" stroke=\"#b0473a\" stroke-width=\"2.4\" stroke-linecap=\"round\"/></svg>Não realiza</button></div>",
+      "css": ".ds-stamps { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: grid; grid-template-columns: repeat(3, 128px); gap: 8px; } .ds-stamp { font: inherit; display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 72px; padding: 8px 6px; border: 1.5px solid #b9cbd7; border-radius: 10px; background: #fff; cursor: pointer; font-weight: 800; font-size: 13px; line-height: 1.15; color: #4b5e6c; text-align: center; transition: background 0.16s, border-color 0.16s, color 0.16s, transform 0.16s cubic-bezier(0.16,1,0.3,1); } .ds-stamp:hover { border-color: #5c6e7b; color: #1b2b36; } .ds-stamp:active { transform: scale(0.97); } .ds-stamp:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; } .ds-stamp svg { transition: transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-stamp[aria-checked=\"true\"] svg { transform: scale(1.12); } .ds-s2[aria-checked=\"true\"] { background: #e2f2e8; border-color: #24804f; color: #165536; box-shadow: inset 0 0 0 1px #24804f; } .ds-s1[aria-checked=\"true\"] { background: #fbf0d2; border-color: #b07a00; color: #7d5700; box-shadow: inset 0 0 0 1px #b07a00; } .ds-s0[aria-checked=\"true\"] { background: #f8e6e2; border-color: #b0473a; color: #8a3329; box-shadow: inset 0 0 0 1px #b0473a; }"
+    },
+    {
+      "name": "Booklet Cover",
+      "kind": "card",
+      "refersTo": "booklet-cover",
+      "description": "A patient as a blue booklet with spine, staples and name plate.",
+      "html": "<a class=\"ds-bcover\" href=\"#\"><span class=\"ds-bcover-plate\"><b>Exemplo: Lia Moreira</b><small>nasc. 10/05/2021</small></span><span class=\"ds-bcover-facts\"><span><small>Idade</small>5 anos e 5 meses</span><span class=\"ds-r\"><small>Geral</small><em>86%</em></span></span></a>",
+      "css": ".ds-bcover { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; position: relative; display: flex; flex-direction: column; gap: 18px; width: 300px; min-height: 220px; padding: 22px 20px 20px 34px; border-radius: 6px 16px 16px 6px; color: #fff; text-decoration: none; background: linear-gradient(90deg, #154a6e 0 18px, rgba(255,255,255,0.22) 18px 19px, rgba(0,0,0,0.12) 19px 20px, transparent 20px), #1e5f8c; box-shadow: 0 2px 3px rgba(18,63,94,0.12), 0 10px 24px rgba(18,63,94,0.14); transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-bcover::before, .ds-bcover::after { content: ''; position: absolute; left: 7px; width: 4px; height: 22px; border-radius: 2px; background: linear-gradient(90deg, #c9d6df, #f4f7f9 60%, #aebdc8); } .ds-bcover::before { top: 22%; } .ds-bcover::after { bottom: 22%; } .ds-bcover:hover { transform: translateY(-3px); box-shadow: 0 4px 6px rgba(18,63,94,0.12), 0 18px 36px rgba(18,63,94,0.2); } .ds-bcover:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; } .ds-bcover-plate { display: grid; gap: 2px; background: #fff; color: #1b2b36; border-radius: 8px; padding: 14px 16px; } .ds-bcover-plate b { font-size: 19px; font-weight: 800; line-height: 1.2; } .ds-bcover-plate small { font-size: 13px; font-weight: 700; color: #4b5e6c; } .ds-bcover-facts { margin-top: auto; display: flex; justify-content: space-between; align-items: end; font-weight: 800; font-size: 15px; } .ds-bcover-facts small { display: block; font-size: 11.5px; font-weight: 700; color: #b8d3e6; } .ds-r { text-align: right; } .ds-r em { font-style: normal; font-size: 22px; line-height: 1.1; }"
+    },
+    {
+      "name": "Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "White content sheet on cool paper; sections split by hairlines.",
+      "html": "<section class=\"ds-sheet\"><div class=\"ds-sec\"><h2>Evolução</h2><p>4 avaliações · 15/01/2025 a 22/07/2026</p></div><div class=\"ds-sec\"><h2>Notas</h2><p>Paciente de demonstração (dados fictícios).</p></div></section>",
+      "css": ".ds-sheet { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; background: #fff; border: 1px solid #d6e2ea; border-radius: 16px; box-shadow: 0 1px 2px rgba(18,63,94,0.06), 0 4px 14px rgba(18,63,94,0.06); overflow: hidden; color: #1b2b36; } .ds-sec { padding: 24px 28px; } .ds-sec + .ds-sec { border-top: 1px solid #d6e2ea; } .ds-sec h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; } .ds-sec p { margin: 4px 0 0; color: #4b5e6c; font-size: 14px; }"
+    },
+    {
+      "name": "Domain Step",
+      "kind": "chip",
+      "refersTo": "step",
+      "description": "Runner step pill; active fills with the domain ink.",
+      "html": "<div class=\"ds-steps\"><button class=\"ds-step is-active\" style=\"--stepc:#2f7fc1\">M. fina <span>5/5</span></button><button class=\"ds-step\"><i style=\"background:#d2513c\"></i>M. grossa <span>2/5</span></button></div>",
+      "css": ".ds-steps { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: flex; gap: 6px; flex-wrap: wrap; } .ds-step { font: inherit; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 99px; border: 1px solid #b9cbd7; background: #fff; cursor: pointer; font-weight: 800; font-size: 14px; color: #4b5e6c; transition: all 0.18s cubic-bezier(0.16,1,0.3,1); } .ds-step:hover { border-color: #1e5f8c; color: #1b2b36; } .ds-step:focus-visible { outline: 3px solid #f2b630; outline-offset: 2px; } .ds-step span { font-size: 12px; color: #5c6e7b; font-weight: 700; } .ds-step i { width: 10px; height: 10px; border-radius: 50%; } .ds-step.is-active { background: var(--stepc); border-color: var(--stepc); color: #fff; } .ds-step.is-active span { color: rgba(255,255,255,0.85); }"
+    },
+    {
+      "name": "Status Badges",
+      "kind": "chip",
+      "refersTo": "badge-draft",
+      "description": "Answer-tint pills for draft / done / plain.",
+      "html": "<span class=\"ds-badge ds-draft\">Rascunho</span> <span class=\"ds-badge ds-done\">Concluída</span> <span class=\"ds-badge ds-plain\">Faixa C</span>",
+      "css": ".ds-badge { font-family: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; padding: 3px 10px; border-radius: 99px; } .ds-draft { background: #fbf0d2; color: #7d5700; } .ds-done { background: #e2f2e8; color: #1a5e3a; } .ds-plain { background: #e3eef5; color: #123f5e; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Caderneta da Criança",
+    "overview": "The app is the child's own health booklet. Caderneta blue is the booklet's cover. It owns the navigation rail, the patient header band and the booklet covers on the patient list. Inside, content sits on white sheets laid on a cool blue-white paper. Each chart is printed like a growth-curve page: banded fills, a fine graph-paper grid, and the age bands marked along the top. Answers are stamped onto the page as shaped marks, never as bare colour.\n\nThe density is set for a therapist holding a tablet while she watches a child. Targets are large (48px buttons, 72px answer stamps), there is one family and one heavy weight, and numbers are tabular everywhere. The tone is warm without going soft. The warmth comes from Nunito Sans's rounded forms, the blue-tinted shadows and a single sun-yellow accent, not from cream paper or illustration. The system rejects the cold white-card clinic dashboard. The Painel is one sheet divided by hairlines, not a grid of floating cards.",
+    "keyCharacteristics": [
+      "Blue booklet chrome around white sheets on cool paper (never cream).",
+      "One family, Nunito Sans, at weight 800 for every heading, value and label; tabular numerals.",
+      "Answer stamps: a shape, a word and a colour, always all three.",
+      "Seven fixed domain inks, used only to identify a domain.",
+      "Growth-curve sheet charts with printed bands and graph-paper grid.",
+      "Soft, blue-tinted, two-layer shadows; flat everywhere else."
+    ],
+    "rules": [
+      {
+        "name": "The Caderneta Blue Rule",
+        "body": "Blue is the booklet's cover and belongs to chrome: rail, cover band, booklet covers, primary action, selected state. Content is never set on a blue sheet. It lives on white sheets over cool paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seven Inks Rule",
+        "body": "Each domain keeps its ink everywhere: chart line, dot, meter, active step, heading swatch, PDF legend. Domain inks identify a domain and nothing else. Never use them for status, chrome or decoration. The overall score (\"Geral\") is always Ink and always the heaviest line.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Sun Rule",
+        "body": "Sun yellow appears at most once per view as an action. Everything else in yellow is a marker (draft tab, logo spine).",
+        "section": "colors"
+      },
+      {
+        "name": "The Weight-Not-Family Rule",
+        "body": "Hierarchy comes from size and weight 800 inside one family. Do not add a second typeface.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "`font-variant-numeric: tabular-nums` is set at the root. Scores, dates and counts always align in columns.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence-Case Rule",
+        "body": "Labels are sentence case at natural tracking. Only headings get the -0.01em tightening.",
+        "section": "typography"
+      },
+      {
+        "name": "The Blue Shadow Rule",
+        "body": "Shadows are tinted with Cover Ink (rgba 18,63,94), never neutral black, and always come in two soft layers.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put content on white sheets over Cool Paper (#f3f7fa), and keep Caderneta Blue for chrome and the primary action.",
+      "**Do** give every answer, status or delta a shape or word as well as its colour (the stamp marks, the +/− signs on deltas).",
+      "**Do** keep each domain on its fixed ink from `DOMINIOS` everywhere it appears, including the PDF.",
+      "**Do** keep session controls at 44px or more (buttons 48px, stamps 72px, steps 44px).",
+      "**Do** draw evolution on the growth-curve sheet: banded fills, graph-paper grid, and an age-band strip above the plot.",
+      "**Do** separate the Painel's parts with hairlines inside one sheet."
+    ],
+    "donts": [
+      "**Don't** use cream or warm-tinted paper. The paper is cool blue-white.",
+      "**Don't** build the white-card clinic dashboard: no grid of separate KPI cards, and no neutral grey shadows.",
+      "**Don't** use a domain ink for status, buttons or decoration.",
+      "**Don't** put more than one Sun action in a view, or white text on Sun.",
+      "**Don't** add a second typeface, uppercase tracked labels, or non-tabular numerals.",
+      "**Don't** read the chart's green and amber bands as clinical zones. They are sheet material, and their alpha stays under 0.08."
+    ]
+  }
+}

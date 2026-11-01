@@ -1,0 +1,130 @@
+{
+  "title": "Escolha o mundo visual",
+  "question": "Direção sorteada: Quadra & Circuito. Manter, trocar por uma alternativa ou sortear de novo.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Quadra & Circuito",
+      "kicker": "THE ROLL",
+      "lineage": "Quadra poliesportiva pintada + circuito psicomotor (fita, bambolê, cone)",
+      "thesis": "A avaliação é um circuito: cada domínio é uma estação marcada no chão, com sua cor de fita.",
+      "palette": ["#1F5E4B", "#E8EFE9", "#F2C230", "#D9543B", "#2F6FB5", "#7A4FA3", "#1C2422"],
+      "materials": ["piso de quadra pintado", "fita adesiva colorida", "linhas de marcação"],
+      "viewport": "Shell com trilho verde-quadra; a avaliação abre com a linha do circuito (7 estações coloridas) no topo e os itens como cartões grandes com 3 botões.",
+      "risk": "Se as cores das 7 fitas forem tímidas vira painel genérico; se forem gritantes vira brinquedo.",
+      "raised": [
+        {"from": "orienteering-map", "raise": "Cor reservada: só a estação ativa ganha o tom forte; as outras ficam em contorno, como o percurso roxo sobre o mapa."},
+        {"from": "character-goods-catalog", "raise": "Cada paciente tem sua 'plaquinha' fixa: nome, nascimento, idade e uma linha de nota, sempre no mesmo lugar."},
+        {"from": "cassette-j-card", "raise": "Orçamento visível: contagem de itens e tempo da sessão alinhados à direita, como o lado A que não pode estourar."},
+        {"from": "crouwel-grid-specimen", "raise": "Grade estrita de 8px que sustenta tudo; nada fora dela."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Caderneta da Criança",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Caderneta de Saúde da Criança (curvas de crescimento, marcos)",
+      "thesis": "O app como a caderneta que toda família brasileira conhece: curvas, marcos e anotações à mão.",
+      "palette": ["#2B7FA8", "#F7F3EA", "#E36F8E", "#3E3A35"],
+      "materials": ["papel impresso", "curvas de crescimento", "carimbos"],
+      "viewport": "Lista de pacientes como capas de caderneta; painel com gráfico no estilo curva de crescimento.",
+      "risk": "Familiar: é onde quase toda versão desta categoria cai, e puxa para o creme 'papel'."
+    },
+    {
+      "id": "challenger-orienteering",
+      "label": "Mapa de Orientação",
+      "verdict": "declined",
+      "lineage": "mapas ISOM de corrida de orientação",
+      "thesis": "Itens como pontos de controle, marcados ao serem 'picotados'.",
+      "palette": ["#FFFFFF", "#9FBF5B", "#F6D44A", "#A0612B", "#B03FA0"],
+      "materials": ["curvas de nível", "tinta roxa de percurso"],
+      "viewport": "Avaliação como percurso de controle a controle.",
+      "case": "Funde bem no fluxo, mas a terapeuta não se reconhece num mapa de corrida.",
+      "risk": "Lê como fantasia esportiva técnica.",
+      "kept": "Uma cor reservada só para o trecho ativo.",
+      "hero": "https://impeccable.style/worlds/cards/notation-diagram-systems-orienteering-map-hero.webp"
+    },
+    {
+      "id": "challenger-character",
+      "label": "Catálogo de Personagens",
+      "verdict": "declined",
+      "lineage": "catálogos de personagens kawaii",
+      "thesis": "Pacientes como elenco em grade pastel.",
+      "palette": ["#FCE4EC", "#E3F2FD", "#FFF8E1", "#FF6F91"],
+      "materials": ["traço branco", "fitas coloridas"],
+      "viewport": "Grade de pacientes com plaquinhas.",
+      "case": "Infantiliza dados clínicos e confunde com gamificação.",
+      "risk": "Vira brinquedo.",
+      "kept": "Mobília fixa por pessoa: plaquinha com nome, nascimento e nota.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-character-goods-catalog-hero.webp"
+    },
+    {
+      "id": "challenger-jcard",
+      "label": "Capa de Fita K7",
+      "verdict": "declined",
+      "lineage": "j-card de mixtape",
+      "thesis": "Avaliação como lado A / lado B cronometrado.",
+      "palette": ["#FFFFFF", "#1F3FA8", "#9AA0A6", "#D7262E"],
+      "materials": ["caneta esferográfica", "papel pautado"],
+      "viewport": "Lista manuscrita de itens com tempos.",
+      "case": "Sem ligação com o mundo da terapeuta.",
+      "risk": "Nostalgia sem função.",
+      "kept": "Orçamento de tempo visível e alinhado à direita.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-cassette-j-card-hero.webp"
+    },
+    {
+      "id": "challenger-annual",
+      "label": "Anuário de Design",
+      "verdict": "declined",
+      "lineage": "pranchas de anuário com marcas de registro",
+      "thesis": "Folha contínua com cruzes de registro e linhas finas.",
+      "palette": ["#F5F4F6", "#16181A", "#DCDDF3", "#C9C7C4"],
+      "materials": ["papel não revestido", "linhas de 1px"],
+      "viewport": "Folha de pranchas com selo.",
+      "case": "Frio e editorial; exatamente o 'hospitalar' a evitar.",
+      "risk": "Distante da sessão.",
+      "kept": "Disciplina de linhas finas para tabelas.",
+      "hero": "https://impeccable.style/worlds/cards/design-annual-s-plate-section-hero.webp"
+    },
+    {
+      "id": "challenger-crouwel",
+      "label": "Grade Crouwel",
+      "verdict": "declined",
+      "lineage": "espécimes tipográficos em grade",
+      "thesis": "Letras construídas célula a célula.",
+      "palette": ["#FFFFFF", "#2A5BD7", "#111111"],
+      "materials": ["papel milimetrado", "tipos monumentais"],
+      "viewport": "Grade visível como estrutura.",
+      "case": "Bonito, mas sem identificação nem clareza extra.",
+      "risk": "Exercício formal.",
+      "kept": "Grade estrita sustentando tudo.",
+      "hero": "https://impeccable.style/worlds/cards/crouwel-grid-specimen-hero.webp"
+    },
+    {
+      "id": "challenger-ikeda",
+      "label": "Campo de Dados",
+      "verdict": "declined",
+      "lineage": "datamatics de Ryoji Ikeda",
+      "thesis": "Barras e números em preto e branco puros.",
+      "palette": ["#000000", "#FFFFFF"],
+      "materials": ["código de barras", "monoespaçada"],
+      "viewport": "Campo de barras estroboscópicas.",
+      "case": "Hostil para sessão com criança e para pais.",
+      "risk": "Frio extremo.",
+      "kept": "Números tabulares densos e honestos.",
+      "hero": "https://impeccable.style/worlds/cards/ikeda-datamatics-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "label": "O padrão da categoria",
+    "thesis": "App de saúde limpo: fundo branco, azul-petróleo, cartões arredondados.",
+    "palette": ["#FFFFFF", "#0F172A", "#0E7490"],
+    "materials": ["grade limpa", "cartões"],
+    "viewport": "Lista de pacientes, abas, formulário em cartões.",
+    "risk": "Indistinguível de qualquer sistema de clínica, e um pouco frio."
+  },
+  "steer": true
+}
