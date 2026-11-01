@@ -6,6 +6,7 @@ import { db } from '../lib/db'
 import { DOMINIOS, faixaPorId, formatarData, formatarIdade, hoje, idadeEmMeses, itensPendentes, pontuar, porData, type Avaliacao } from '../lib/domain'
 import { configBarras, configEvolucao } from '../lib/charts'
 import { Confirmar, Grafico, avisar } from '../components/ui'
+import { t } from '../i18n'
 
 export default function PacientePage() {
   const { id = '', aba } = useParams()
@@ -16,7 +17,7 @@ export default function PacientePage() {
   const [excluirPaciente, setExcluirPaciente] = useState(false)
 
   if (paciente === undefined || avaliacoes === undefined) return null
-  if (paciente === null) return <div className="page"><h1>Paciente não encontrado</h1><p><Link to="/">Voltar aos pacientes</Link></p></div>
+  if (paciente === null) return <div className="page"><h1>{t('paciente.naoEncontrado')}</h1><p><Link to="/">{t('comum.voltarPacientes')}</Link></p></div>
 
   const concluidas = avaliacoes.filter((a) => a.status === 'concluida')
   const rascunho = avaliacoes.find((a) => a.status === 'rascunho')
@@ -26,29 +27,29 @@ export default function PacientePage() {
     <>
       <section className="cover">
         <div className="cover-in">
-          <Link to="/" className="back"><ArrowLeft size={16} /> Pacientes</Link>
+          <Link to="/" className="back"><ArrowLeft size={16} /> {t('pacientes.titulo')}</Link>
           <div className="cover-top">
             <div>
               <h1>{paciente.nome}</h1>
               <dl className="idbox">
-                <div><dt>Nascimento</dt><dd>{formatarData(paciente.dataNascimento)}</dd></div>
-                <div><dt>Idade</dt><dd>{formatarIdade(idadeEmMeses(paciente.dataNascimento, hoje()))}</dd></div>
-                {paciente.responsavel && <div><dt>Responsável</dt><dd>{paciente.responsavel}</dd></div>}
+                <div><dt>{t('paciente.nascimento')}</dt><dd>{formatarData(paciente.dataNascimento)}</dd></div>
+                <div><dt>{t('comum.idade')}</dt><dd>{formatarIdade(idadeEmMeses(paciente.dataNascimento, hoje()))}</dd></div>
+                {paciente.responsavel && <div><dt>{t('comum.responsavel')}</dt><dd>{paciente.responsavel}</dd></div>}
               </dl>
             </div>
             <div className="row">
-              <Link to={`/paciente/${id}/editar`} className="btn btn-icon" aria-label="Editar dados do paciente" title="Editar dados"><Pencil size={18} /></Link>
-              {concluidas.length > 0 && <Link to={`/paciente/${id}/relatorio`} className="btn"><FileText size={18} /> Relatório PDF</Link>}
+              <Link to={`/paciente/${id}/editar`} className="btn btn-icon" aria-label={t('paciente.editarRotulo')} title={t('paciente.editar')}><Pencil size={18} /></Link>
+              {concluidas.length > 0 && <Link to={`/paciente/${id}/relatorio`} className="btn"><FileText size={18} /> {t('relatorio.titulo')}</Link>}
               {rascunho ? (
-                <Link to={`/avaliacao/${rascunho.id}`} className="btn btn-sun"><ClipboardPlus size={18} /> Continuar rascunho</Link>
+                <Link to={`/avaliacao/${rascunho.id}`} className="btn btn-sun"><ClipboardPlus size={18} /> {t('paciente.continuarRascunho')}</Link>
               ) : (
-                <Link to={`/paciente/${id}/nova`} className="btn btn-sun"><ClipboardPlus size={18} /> Nova avaliação</Link>
+                <Link to={`/paciente/${id}/nova`} className="btn btn-sun"><ClipboardPlus size={18} /> {t('nova.titulo')}</Link>
               )}
             </div>
           </div>
-          <nav className="tabs" aria-label="Seções do paciente">
-            <NavLink to={`/paciente/${id}`} end className={aAba === 'painel' ? 'active' : ''}>Painel</NavLink>
-            <NavLink to={`/paciente/${id}/avaliacoes`} className={aAba === 'avaliacoes' ? 'active' : ''}>Avaliações <span className="count">{avaliacoes.length}</span></NavLink>
+          <nav className="tabs" aria-label={t('paciente.secoes')}>
+            <NavLink to={`/paciente/${id}`} end className={aAba === 'painel' ? 'active' : ''}>{t('paciente.painel')}</NavLink>
+            <NavLink to={`/paciente/${id}/avaliacoes`} className={aAba === 'avaliacoes' ? 'active' : ''}>{t('comum.avaliacoes')} <span className="count">{avaliacoes.length}</span></NavLink>
           </nav>
         </div>
       </section>
@@ -60,9 +61,9 @@ export default function PacientePage() {
           <>
             {avaliacoes.length === 0 ? (
               <div className="sheet empty">
-                <h2>Nenhuma avaliação</h2>
-                <p>Comece a primeira avaliação; ela fica salva como rascunho até todos os itens serem respondidos.</p>
-                <Link to={`/paciente/${id}/nova`} className="btn btn-primary"><ClipboardPlus size={18} /> Nova avaliação</Link>
+                <h2>{t('paciente.nenhumaAvaliacao')}</h2>
+                <p>{t('paciente.nenhumaAvaliacaoTexto')}</p>
+                <Link to={`/paciente/${id}/nova`} className="btn btn-primary"><ClipboardPlus size={18} /> {t('nova.titulo')}</Link>
               </div>
             ) : (
               <div className="sheet">
@@ -74,16 +75,16 @@ export default function PacientePage() {
                       <li key={a.id}>
                         <div>
                           <div className="when">{formatarData(a.data)}</div>
-                          <div className="sub">{formatarIdade(a.idadeMeses)} · Faixa {a.faixa} ({f.rotulo}){a.faixaManual ? ' · escolhida manualmente' : ''}</div>
+                          <div className="sub">{formatarIdade(a.idadeMeses)} · {t('comum.faixa', { id: a.faixa })} ({f.rotulo}){a.faixaManual ? ` · ${t('comum.escolhidaManualmente')}` : ''}</div>
                         </div>
                         <div>
                           {a.status === 'concluida'
-                            ? <span className="badge badge-done">Concluída · {pontuar(a).geral}%</span>
-                            : <span className="badge badge-draft">Rascunho · faltam {pend}</span>}
+                            ? <span className="badge badge-done">{t('paciente.concluida', { n: pontuar(a).geral })}</span>
+                            : <span className="badge badge-draft">{t('paciente.rascunhoFaltam', { n: pend })}</span>}
                         </div>
                         <div className="row">
-                          <button className="btn btn-sm btn-danger btn-ghost" onClick={() => setExcluir(a)} aria-label={`Excluir avaliação de ${formatarData(a.data)}`}><Trash2 size={16} /> Excluir</button>
-                          <Link className="btn btn-sm" to={`/avaliacao/${a.id}`}>{a.status === 'concluida' ? 'Abrir' : 'Continuar'} <ChevronRight size={16} /></Link>
+                          <button className="btn btn-sm btn-danger btn-ghost" onClick={() => setExcluir(a)} aria-label={t('paciente.excluirAvaliacaoDe', { data: formatarData(a.data) })}><Trash2 size={16} /> {t('comum.excluir')}</button>
+                          <Link className="btn btn-sm" to={`/avaliacao/${a.id}`}>{t(a.status === 'concluida' ? 'paciente.abrir' : 'paciente.continuar')} <ChevronRight size={16} /></Link>
                         </div>
                       </li>
                     )
@@ -92,7 +93,7 @@ export default function PacientePage() {
               </div>
             )}
             <div className="row" style={{ marginTop: 32, justifyContent: 'flex-end' }}>
-              <button className="btn btn-sm btn-ghost btn-danger" onClick={() => setExcluirPaciente(true)}><Trash2 size={16} /> Excluir paciente</button>
+              <button className="btn btn-sm btn-ghost btn-danger" onClick={() => setExcluirPaciente(true)}><Trash2 size={16} /> {t('paciente.excluirPaciente')}</button>
             </div>
           </>
         )}
@@ -100,18 +101,18 @@ export default function PacientePage() {
 
       <Confirmar
         aberto={!!excluir}
-        titulo="Excluir avaliação?"
-        texto={excluir && <>A avaliação de <b>{formatarData(excluir.data)}</b> e todas as respostas serão apagadas. Não dá para desfazer.</>}
-        acao="Excluir avaliação"
+        titulo={t('paciente.excluirAvaliacaoTitulo')}
+        texto={excluir && t('paciente.excluirAvaliacaoTexto', { data: formatarData(excluir.data) })}
+        acao={t('paciente.excluirAvaliacao')}
         perigo
         onCancelar={() => setExcluir(null)}
-        onConfirmar={async () => { if (excluir) await db.avaliacoes.delete(excluir.id); setExcluir(null); avisar('Avaliação excluída.') }}
+        onConfirmar={async () => { if (excluir) await db.avaliacoes.delete(excluir.id); setExcluir(null); avisar(t('paciente.avaliacaoExcluida')) }}
       />
       <Confirmar
         aberto={excluirPaciente}
-        titulo="Excluir paciente?"
-        texto={<><b>{paciente.nome}</b> e as {avaliacoes.length} avaliações serão apagados deste aparelho. Não dá para desfazer.</>}
-        acao="Excluir tudo"
+        titulo={t('paciente.excluirPacienteTitulo')}
+        texto={t('paciente.excluirPacienteTexto', { nome: paciente.nome, n: avaliacoes.length })}
+        acao={t('paciente.excluirTudo')}
         perigo
         onCancelar={() => setExcluirPaciente(false)}
         onConfirmar={async () => {
@@ -119,7 +120,7 @@ export default function PacientePage() {
             await db.avaliacoes.where('pacienteId').equals(id).delete()
             await db.pacientes.delete(id)
           })
-          avisar('Paciente excluído.')
+          avisar(t('paciente.pacienteExcluido'))
           nav('/', { replace: true })
         }}
       />
@@ -134,9 +135,9 @@ function Painel({ concluidas, pacienteId, temRascunho, notas }: { concluidas: Av
   if (concluidas.length === 0)
     return (
       <div className="sheet empty">
-        <h2>O painel aparece depois da primeira avaliação concluída</h2>
-        <p>{temRascunho ? 'Há um rascunho em andamento. Conclua-o para ver as pontuações por domínio.' : 'Faça a primeira avaliação para ver as pontuações por domínio e, a partir da segunda, a evolução.'}</p>
-        {!temRascunho && <Link to={`/paciente/${pacienteId}/nova`} className="btn btn-primary"><ClipboardPlus size={18} /> Nova avaliação</Link>}
+        <h2>{t('painel.vazioTitulo')}</h2>
+        <p>{t(temRascunho ? 'painel.vazioRascunho' : 'painel.vazioTexto')}</p>
+        {!temRascunho && <Link to={`/paciente/${pacienteId}/nova`} className="btn btn-primary"><ClipboardPlus size={18} /> {t('nova.titulo')}</Link>}
       </div>
     )
 
@@ -145,35 +146,35 @@ function Painel({ concluidas, pacienteId, temRascunho, notas }: { concluidas: Av
   const p = pontuar(ultima)
   const pa = anterior ? pontuar(anterior) : null
 
-  const linhas = [{ id: 'geral' as const, nome: 'Geral', cor: 'var(--ink)' }, ...DOMINIOS]
+  const linhas = [{ id: 'geral' as const, nome: t('comum.geral'), cor: 'var(--ink)' }, ...DOMINIOS]
   return (
     <div className="sheet folha">
       <section className="folha-sec">
         <div className="sheet-head">
-          <h2>Evolução</h2>
-          <p>{concluidas.length} {concluidas.length === 1 ? 'avaliação' : 'avaliações'} · {formatarData(concluidas[0].data)}{concluidas.length > 1 ? ` a ${formatarData(ultima.data)}` : ''}</p>
+          <h2>{t('painel.evolucao')}</h2>
+          <p>{t(concluidas.length === 1 ? 'painel.contagem1' : 'painel.contagem', { n: concluidas.length })} · {concluidas.length > 1 ? t('comum.periodo', { de: formatarData(concluidas[0].data), ate: formatarData(ultima.data) }) : formatarData(concluidas[0].data)}</p>
         </div>
         {evol ? (
           <>
             <Grafico config={evol} />
-            <p className="small muted" style={{ marginTop: 10 }}>Toque na legenda para mostrar ou ocultar domínios. A faixa azul no topo e a linha tracejada marcam a mudança de faixa etária.</p>
+            <p className="small muted" style={{ marginTop: 10 }}>{t('painel.evolucaoDica')}</p>
           </>
         ) : (
-          <div className="note"><Info size={18} />A linha de evolução aparece a partir da segunda avaliação concluída.</div>
+          <div className="note"><Info size={18} />{t('painel.evolucaoVazia')}</div>
         )}
       </section>
       <div className="folha-split">
         <section className="folha-sec">
           <div className="sheet-head">
-            <h2>Comparativo por domínio</h2>
-            <p>{Math.min(concluidas.length, 4) === 1 ? 'Última avaliação' : `Últimas ${Math.min(concluidas.length, 4)}, da mais antiga (clara) à mais recente (escura)`}</p>
+            <h2>{t('painel.comparativo')}</h2>
+            <p>{Math.min(concluidas.length, 4) === 1 ? t('comum.ultimaAvaliacao') : t('painel.comparativoN', { n: Math.min(concluidas.length, 4) })}</p>
           </div>
           {barras && <Grafico config={barras} className="sm" />}
         </section>
         <section className="folha-sec">
-          <div className="sheet-head"><h2>Última avaliação</h2><p>{formatarData(ultima.data)}</p></div>
+          <div className="sheet-head"><h2>{t('comum.ultimaAvaliacao')}</h2><p>{formatarData(ultima.data)}</p></div>
           <table className="ledger">
-            <thead><tr><th scope="col">Domínio</th><th scope="col">Atual</th>{pa && <th scope="col">Variação</th>}</tr></thead>
+            <thead><tr><th scope="col">{t('painel.dominio')}</th><th scope="col">{t('painel.atual')}</th>{pa && <th scope="col">{t('painel.variacao')}</th>}</tr></thead>
             <tbody>
               {linhas.map((d) => (
                 <tr key={d.id} className={d.id === 'geral' ? 'is-geral' : ''}>
@@ -184,12 +185,12 @@ function Painel({ concluidas, pacienteId, temRascunho, notas }: { concluidas: Av
               ))}
             </tbody>
           </table>
-          {pa && <p className="small muted" style={{ marginTop: 10 }}>Variação em pontos em relação a {formatarData(anterior.data)}.</p>}
+          {pa && <p className="small muted" style={{ marginTop: 10 }}>{t('painel.variacaoDica', { data: formatarData(anterior.data) })}</p>}
         </section>
       </div>
       {notas && (
         <section className="folha-sec">
-          <h2 style={{ marginBottom: 6 }}>Notas</h2>
+          <h2 style={{ marginBottom: 6 }}>{t('comum.notas')}</h2>
           <p className="muted" style={{ whiteSpace: 'pre-wrap' }}>{notas}</p>
         </section>
       )}

@@ -4,18 +4,8 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { ArrowLeft, ArrowRight, Check, CloudCheck, Plus } from 'lucide-react'
 import { db } from '../lib/db'
 import { DOMINIOS, RESPOSTAS, faixaPorId, formatarData, formatarIdade, itensPendentes, type Avaliacao, type Item, type DominioId, type Resposta } from '../lib/domain'
-import { SUGESTOES } from '../data/sugestoes'
 import { Marca, avisar } from '../components/ui'
-
-const DESCRICAO: Record<DominioId, string> = {
-  MF: 'Preensão, manipulação, grafismo e recorte.',
-  MG: 'Correr, chutar, arremessar, saltar e coordenação global.',
-  EE: 'Manter posturas paradas: um pé, olhos fechados, estátua.',
-  ED: 'Pular com um pé, andar em superfícies estreitas, ponta dos pés, parar ao comando.',
-  EN: 'Padrão cruzado; a partir de 4 anos, quadrupedia em circuito.',
-  ES: 'Subir e descer com segurança em degraus, trepa-trepa, parede.',
-  LA: 'Preferência mão/pé, linha média, noção de direita e esquerda.',
-}
+import { sugestoes, t } from '../i18n'
 
 const FINAL = 7
 
@@ -63,7 +53,7 @@ export default function AvaliacaoPage() {
     return m
   }, [faixa])
 
-  if (inicial === null) return <div className="page"><h1>Avaliação não encontrada</h1><p><Link to="/">Voltar aos pacientes</Link></p></div>
+  if (inicial === null) return <div className="page"><h1>{t('avaliacao.naoEncontrada')}</h1><p><Link to="/">{t('comum.voltarPacientes')}</Link></p></div>
   if (!av || !faixa || !paciente) return null
 
   const total = faixa.itens.length
@@ -81,7 +71,7 @@ export default function AvaliacaoPage() {
     clearTimeout(timer.current)
     await db.avaliacoes.put({ ...av, status: 'concluida', atualizadoEm: new Date().toISOString() })
     ultimo.current = null
-    avisar(av.status === 'concluida' ? 'Avaliação atualizada.' : 'Avaliação concluída. Painel atualizado.')
+    avisar(t(av.status === 'concluida' ? 'avaliacao.atualizada' : 'avaliacao.concluidaAviso'))
     nav(`/paciente/${av.pacienteId}`)
   }
 
@@ -94,16 +84,16 @@ export default function AvaliacaoPage() {
           <div className="runner-meta">
             <div>
               <Link to={`/paciente/${paciente.id}`} className="back" style={{ color: 'var(--blue)', minHeight: 28 }}><ArrowLeft size={16} /> {paciente.nome}</Link>
-              <h1>{av.status === 'concluida' ? 'Avaliação concluída' : 'Avaliação em andamento'}</h1>
-              <div className="sub">{formatarData(av.data)} · {formatarIdade(av.idadeMeses)} · Faixa {av.faixa} ({faixa.rotulo}){av.faixaManual ? ', escolhida manualmente' : ''}</div>
+              <h1>{t(av.status === 'concluida' ? 'avaliacao.concluida' : 'avaliacao.emAndamento')}</h1>
+              <div className="sub">{formatarData(av.data)} · {formatarIdade(av.idadeMeses)} · {t('comum.faixa', { id: av.faixa })} ({faixa.rotulo}){av.faixaManual ? `, ${t('comum.escolhidaManualmente')}` : ''}</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontWeight: 800, fontSize: 18 }}>{respondidos} de {total} itens</div>
-              <span className="saved" aria-live="polite">{salvo ? <><CloudCheck size={15} /> {av.status === 'rascunho' ? 'Rascunho salvo' : 'Salvo'}</> : 'Salvando…'}</span>
+              <div style={{ fontWeight: 800, fontSize: 18 }}>{t('avaliacao.progresso', { n: respondidos, total })}</div>
+              <span className="saved" aria-live="polite">{salvo ? <><CloudCheck size={15} /> {t(av.status === 'rascunho' ? 'avaliacao.rascunhoSalvo' : 'avaliacao.salvo')}</> : t('avaliacao.salvando')}</span>
             </div>
           </div>
-          <div className="progress" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={respondidos} aria-label="Itens respondidos"><i style={{ transform: `scaleX(${respondidos / total})` }} /></div>
-          <nav className="steps" aria-label="Domínios">
+          <div className="progress" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={respondidos} aria-label={t('avaliacao.itensRespondidos')}><i style={{ transform: `scaleX(${respondidos / total})` }} /></div>
+          <nav className="steps" aria-label={t('avaliacao.dominios')}>
             {DOMINIOS.map((d, i) => {
               const its = porDominio[d.id] ?? []
               const r = its.filter((it) => av.respostas[it.codigo] !== undefined).length
@@ -116,7 +106,7 @@ export default function AvaliacaoPage() {
               )
             })}
             <button className={`step ${passo === FINAL ? 'active' : ''}`} onClick={() => irPara(FINAL)} aria-current={passo === FINAL ? 'step' : undefined}>
-              Finalizar
+              {t('avaliacao.finalizar')}
             </button>
           </nav>
         </div>
@@ -126,7 +116,7 @@ export default function AvaliacaoPage() {
         {dominio ? (
           <>
             <div className="dom-head"><span className="swatch" style={{ background: dominio.cor }} /><h2>{dominio.nome}</h2></div>
-            <p className="dom-desc">{DESCRICAO[dominio.id]}</p>
+            <p className="dom-desc">{t(`descricao.${dominio.id}`)}</p>
             <ol className="sheet items">
               {(porDominio[dominio.id] ?? []).map((it) => {
                 const v = av.respostas[it.codigo]
@@ -149,14 +139,14 @@ export default function AvaliacaoPage() {
               })}
             </ol>
             <div className="field" style={{ marginTop: 22 }}>
-              <label htmlFor="obs-d">Observações sobre {dominio.nome.toLowerCase()} <span className="muted" style={{ fontWeight: 600 }}>(opcional)</span></label>
+              <label htmlFor="obs-d">{t('avaliacao.obsDominio', { dominio: dominio.nome.toLowerCase() })} <span className="muted" style={{ fontWeight: 600 }}>{t('comum.opcional')}</span></label>
               <textarea id="obs-d" className="textarea" style={{ minHeight: 90 }} value={av.obsDominio[dominio.id] ?? ''}
                 onChange={(e) => persistir({ ...av, obsDominio: { ...av.obsDominio, [dominio.id]: e.target.value } })} />
             </div>
             <div className="runner-foot">
-              <button className="btn" disabled={passo === 0} onClick={() => irPara(passo - 1)}><ArrowLeft size={18} /> Anterior</button>
+              <button className="btn" disabled={passo === 0} onClick={() => irPara(passo - 1)}><ArrowLeft size={18} /> {t('avaliacao.anterior')}</button>
               <button className="btn btn-primary" onClick={() => irPara(passo + 1)}>
-                {passo === FINAL - 1 ? 'Finalizar' : `Próximo: ${DOMINIOS[passo + 1].nome}`} <ArrowRight size={18} />
+                {passo === FINAL - 1 ? t('avaliacao.finalizar') : t('avaliacao.proximo', { dominio: DOMINIOS[passo + 1].nome })} <ArrowRight size={18} />
               </button>
             </div>
           </>
@@ -178,21 +168,21 @@ function Final({ av, pendentes, persistir, irPara, concluir }: {
   }
   return (
     <>
-      <div className="dom-head"><h2>Finalizar</h2></div>
-      <p className="dom-desc">Observações gerais e recomendações entram no relatório para os pais.</p>
+      <div className="dom-head"><h2>{t('avaliacao.finalizar')}</h2></div>
+      <p className="dom-desc">{t('avaliacao.finalDesc')}</p>
       <div className="sheet sheet-pad">
         <div className="field">
-          <label htmlFor="obs">Observações gerais</label>
+          <label htmlFor="obs">{t('comum.observacoesGerais')}</label>
           <textarea id="obs" className="textarea" value={av.observacoes} onChange={(e) => persistir({ ...av, observacoes: e.target.value })}
-            placeholder="Como a criança se apresentou, comportamento, engajamento, pontos de atenção" />
+            placeholder={t('avaliacao.obsDica')} />
         </div>
         <div className="field">
-          <label htmlFor="rec">Recomendações</label>
+          <label htmlFor="rec">{t('comum.recomendacoes')}</label>
           <textarea id="rec" className="textarea" style={{ minHeight: 160 }} value={av.recomendacoes} onChange={(e) => persistir({ ...av, recomendacoes: e.target.value })}
-            placeholder="Escreva livremente ou insira sugestões abaixo e ajuste o texto" />
+            placeholder={t('avaliacao.recDica')} />
           <div className="sugg">
-            <span className="label">Sugestões prontas</span>
-            <div className="sugg-tabs" role="group" aria-label="Domínio das sugestões" style={{ marginTop: 8 }}>
+            <span className="label">{t('avaliacao.sugestoes')}</span>
+            <div className="sugg-tabs" role="group" aria-label={t('avaliacao.sugestoesDominio')} style={{ marginTop: 8 }}>
               {DOMINIOS.map((d) => (
                 <button key={d.id} type="button" className="chip" aria-pressed={dom === d.id} onClick={() => setDom(d.id)}>
                   <i className="dot" style={{ background: d.cor }} />{d.curto}
@@ -200,7 +190,7 @@ function Final({ av, pendentes, persistir, irPara, concluir }: {
               ))}
             </div>
             <div className="sugg-list">
-              {SUGESTOES[dom].map((s) => (
+              {sugestoes(dom).map((s) => (
                 <button key={s} type="button" className="sugg-item" onClick={() => inserir(s)}><Plus size={16} />{s}</button>
               ))}
             </div>
@@ -211,22 +201,22 @@ function Final({ av, pendentes, persistir, irPara, concluir }: {
       <div className="sheet sheet-pad" style={{ marginTop: 20 }}>
         {pendentes.length > 0 ? (
           <>
-            <h2 style={{ fontSize: 18 }}>Faltam {pendentes.length} {pendentes.length === 1 ? 'item' : 'itens'} para concluir</h2>
-            <p className="muted small" style={{ marginTop: 4 }}>A avaliação fica salva como rascunho até tudo ser respondido.</p>
+            <h2 style={{ fontSize: 18 }}>{t(pendentes.length === 1 ? 'avaliacao.falta1' : 'avaliacao.faltam', { n: pendentes.length })}</h2>
+            <p className="muted small" style={{ marginTop: 4 }}>{t('avaliacao.rascunhoDica')}</p>
             <ul className="pending">
               {pendentes.slice(0, 8).map((i) => (
                 <li key={i.codigo}><button onClick={() => irPara(DOMINIOS.findIndex((d) => d.id === i.dominio))}>{DOMINIOS.find((d) => d.id === i.dominio)!.nome}: {i.texto}</button></li>
               ))}
-              {pendentes.length > 8 && <li className="muted small">e mais {pendentes.length - 8}.</li>}
+              {pendentes.length > 8 && <li className="muted small">{t('avaliacao.eMais', { n: pendentes.length - 8 })}</li>}
             </ul>
           </>
         ) : (
-          <p style={{ fontWeight: 700 }}><Check size={18} color="var(--ok)" style={{ verticalAlign: -3 }} /> Todos os itens respondidos.</p>
+          <p style={{ fontWeight: 700 }}><Check size={18} color="var(--ok)" style={{ verticalAlign: -3 }} /> {t('avaliacao.todosRespondidos')}</p>
         )}
         <div className="form-actions">
-          <button className="btn" onClick={() => irPara(FINAL - 1)}><ArrowLeft size={18} /> Voltar</button>
+          <button className="btn" onClick={() => irPara(FINAL - 1)}><ArrowLeft size={18} /> {t('comum.voltar')}</button>
           <button className="btn btn-primary" disabled={pendentes.length > 0} onClick={concluir}>
-            <Check size={18} /> {av.status === 'concluida' ? 'Salvar e voltar ao painel' : 'Concluir avaliação'}
+            <Check size={18} /> {t(av.status === 'concluida' ? 'avaliacao.salvarVoltar' : 'avaliacao.concluir')}
           </button>
         </div>
       </div>

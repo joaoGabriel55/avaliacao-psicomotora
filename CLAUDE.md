@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-"Avaliação Psicomotora": an offline-first PWA for a single pediatric therapist to apply a psychomotor questionnaire (0–15 years), track each child's evolution, and generate a parent-facing A4 PDF. No backend, no login: all data lives in the browser's IndexedDB. UI and PDF are in Brazilian Portuguese; code identifiers are in Portuguese too (`paciente`, `avaliacao`, `faixa`, `dominio`, `respostas`).
+"Avaliação Psicomotora": an offline-first PWA for a single pediatric therapist to apply a psychomotor questionnaire (0–15 years), track each child's evolution, and generate a parent-facing A4 PDF. No backend, no login: all data lives in the browser's IndexedDB. UI and PDF are in Brazilian Portuguese, English or Spanish (chosen in Configurações); code identifiers are in Portuguese (`paciente`, `avaliacao`, `faixa`, `dominio`, `respostas`).
 
 - `SPEC.md` is the functional source of truth (item bank, scoring, PDF sections, acceptance criteria).
 - `PRODUCT.md` holds product context; `DESIGN.md` + `.impeccable/design.json` hold the visual system ("Caderneta da Criança" world). Read DESIGN.md before UI changes.
@@ -27,6 +27,8 @@ Production: https://avaliacao-psicomotora.vercel.app (static Vite output on Verc
 ## Architecture
 
 **Questionnaire data.** `src/data/questionario.json` (versioned, `versao`) holds 5 age bands (A–E) with items `{codigo, dominio, texto}`. It was generated from the tables in SPEC.md; item codes (`C-MF-1` = band + domain + n) are how answers and the PDF item-by-item table link the same question across assessments. Editing the questionnaire means editing this JSON (not editable in-app by design); bump `versao` when items change, since each `Avaliacao` stores `versaoQuestionario`.
+
+**i18n — `src/i18n/`.** `pt.json`, `en.json`, `es.json`, each with `ui` (flat keys, `{var}` placeholders), `questionario` (band id / item code → text; empty in pt because `questionario.json` is the Portuguese source) and `sugestoes`. `t(chave)` is typed against `pt.json`; `i18n.test.ts` fails if en/es miss a key, an item or a placeholder. Language lives in `Configuracoes.idioma` (cached in localStorage for first paint, browser language as default); `App.tsx` sets it during render and keys the shell on it, so a change remounts the pages. `DOMINIOS`, `RESPOSTAS`, `TEMAS` and questionnaire `rotulo`/`texto` are getters, so they read the current language at access time. New UI text: add the key to all three JSON files.
 
 **Domain logic — `src/lib/domain.ts`.** Types, the 7 domains with their fixed chart colors (`DOMINIOS`), age/band math (`idadeEmMeses`, `faixaSugerida`), scoring (`pontuar`: domain % = sum ÷ (2 × items) × 100, overall = mean of the 7 unrounded domains, then rounded), `itensPendentes`, and the auto sentence for the PDF (`maiorAvanco`). Scoring by percentage is what lets charts compare assessments across different bands. Dates are stored as `AAAA-MM-DD` strings, not `Date`.
 

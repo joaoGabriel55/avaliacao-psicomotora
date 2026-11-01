@@ -1,15 +1,17 @@
+import { t, type Chave } from '../i18n'
+
 /** Theme: one cover colour, from which every blue-family token of the app, charts and PDF is derived. */
 
+const tema = (id: string, cor: string) => ({ cor, get nome() { return t(`tema.${id}` as Chave) } })
 export const TEMAS = [
-  { nome: 'Azul caderneta', cor: '#1e5f8c' },
-  { nome: 'Verde-água', cor: '#1d6b6b' },
-  { nome: 'Verde-folha', cor: '#2f6b3a' },
-  { nome: 'Lavanda', cor: '#5b4391' },
-  { nome: 'Rosa', cor: '#a33a66' },
-  { nome: 'Terracota', cor: '#a3472a' },
-  { nome: 'Grafite', cor: '#3d4a55' },
+  tema('azul', '#1e5f8c'),
+  tema('verdeAgua', '#1d6b6b'),
+  tema('verdeFolha', '#2f6b3a'),
+  tema('lavanda', '#5b4391'),
+  tema('rosa', '#a33a66'),
+  tema('terracota', '#a3472a'),
+  tema('grafite', '#3d4a55'),
 ] as const
-
 export const COR_PADRAO: string = TEMAS[0].cor
 
 type RGB = [number, number, number]

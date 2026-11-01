@@ -1,4 +1,5 @@
 import questionarioJson from '../data/questionario.json'
+import { locale, t, textoQuestionario, type Idioma } from '../i18n'
 
 export type DominioId = 'MF' | 'MG' | 'EE' | 'ED' | 'EN' | 'ES' | 'LA'
 export type FaixaId = 'A' | 'B' | 'C' | 'D' | 'E'
@@ -9,23 +10,38 @@ export interface Faixa { id: FaixaId; rotulo: string; idadeMinMeses: number; ida
 export interface Questionario { versao: number; faixas: Faixa[] }
 
 export const questionario = questionarioJson as Questionario
+// Band labels and item texts follow the UI language at read time; questionario.json holds the Portuguese.
+for (const f of questionario.faixas) {
+  const rotulo = f.rotulo
+  Object.defineProperty(f, 'rotulo', { get: () => textoQuestionario(f.id, rotulo) })
+  for (const i of f.itens) {
+    const texto = i.texto
+    Object.defineProperty(i, 'texto', { get: () => textoQuestionario(i.codigo, texto) })
+  }
+}
 
+const dominio = (id: DominioId, cor: string) => ({
+  id, cor,
+  get nome() { return t(`dominio.${id}`) },
+  get curto() { return t(`dominio.${id}.curto`) },
+})
 export const DOMINIOS: { id: DominioId; nome: string; curto: string; cor: string }[] = [
-  { id: 'MF', nome: 'Motricidade fina', curto: 'M. fina', cor: '#2F7FC1' },
-  { id: 'MG', nome: 'Motricidade grossa', curto: 'M. grossa', cor: '#D2513C' },
-  { id: 'EE', nome: 'Equilíbrio estático', curto: 'Eq. estático', cor: '#2E9467' },
-  { id: 'ED', nome: 'Equilíbrio dinâmico', curto: 'Eq. dinâmico', cor: '#C58A00' },
-  { id: 'EN', nome: 'Engatinhar', curto: 'Engatinhar', cor: '#8457B5' },
-  { id: 'ES', nome: 'Escalar', curto: 'Escalar', cor: '#9C5F2C' },
-  { id: 'LA', nome: 'Lateralidade', curto: 'Lateralidade', cor: '#CC4F8A' },
+  dominio('MF', '#2F7FC1'),
+  dominio('MG', '#D2513C'),
+  dominio('EE', '#2E9467'),
+  dominio('ED', '#C58A00'),
+  dominio('EN', '#8457B5'),
+  dominio('ES', '#9C5F2C'),
+  dominio('LA', '#CC4F8A'),
 ]
 export const dominioNome = (id: DominioId) => DOMINIOS.find((d) => d.id === id)!.nome
 
-export const RESPOSTAS: { valor: Resposta; rotulo: string; curto: string }[] = [
-  { valor: 2, rotulo: 'Realiza', curto: 'Realiza' },
-  { valor: 1, rotulo: 'Em desenvolvimento', curto: 'Em desenv.' },
-  { valor: 0, rotulo: 'Não realiza', curto: 'Não realiza' },
-]
+const resposta = (valor: Resposta) => ({
+  valor,
+  get rotulo() { return t(`resposta.${valor}`) },
+  get curto() { return t(`resposta.${valor}.curto`) },
+})
+export const RESPOSTAS: { valor: Resposta; rotulo: string; curto: string }[] = [resposta(2), resposta(1), resposta(0)]
 export const respostaRotulo = (v: Resposta | undefined) => RESPOSTAS.find((r) => r.valor === v)?.rotulo ?? '—'
 
 export interface Paciente {
@@ -61,6 +77,7 @@ export interface Configuracoes {
   contato: string
   logo?: string // data URL
   corTema?: string // '#rrggbb'; app + PDF cover colour, see lib/tema.ts
+  idioma?: Idioma // UI + PDF language; unset = browser language
   concluidasNoUltimoBackup: number
 }
 
@@ -79,11 +96,11 @@ export function formatarIdade(meses: number): string {
   if (meses < 0) return '—'
   const anos = Math.floor(meses / 12)
   const resto = meses % 12
-  const a = anos === 1 ? '1 ano' : `${anos} anos`
-  const m = resto === 1 ? '1 mês' : `${resto} meses`
+  const a = t(anos === 1 ? 'idade.ano' : 'idade.anos', { n: anos })
+  const m = t(resto === 1 ? 'idade.mes' : 'idade.meses', { n: resto })
   if (anos === 0) return m
   if (resto === 0) return a
-  return `${a} e ${m}`
+  return t('idade.anosEMeses', { a, m })
 }
 
 export const IDADE_MAXIMA_MESES = 191
@@ -124,10 +141,8 @@ export const hoje = () => {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
-export const formatarData = (iso: string) => {
-  const [y, m, d] = iso.slice(0, 10).split('-')
-  return `${d}/${m}/${y}`
-}
+export const formatarData = (iso: string) =>
+  new Date(iso.slice(0, 10) + 'T00:00:00Z').toLocaleDateString(locale(), { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' })
 
 export const novoId = () => crypto.randomUUID()
 
@@ -141,10 +156,10 @@ export function maiorAvanco(avs: Avaliacao[]): string {
     const delta = b[d.id] - a[d.id]
     if (!melhor || delta > melhor.delta) melhor = { d: d.id, delta }
   }
-  if (!melhor || melhor.delta <= 0) return 'Nenhum domínio teve avanço entre a primeira e a última avaliação do período.'
+  if (!melhor || melhor.delta <= 0) return t('avanco.nenhum')
   const geral = b.geral - a.geral
-  const g = geral === 0 ? 'A pontuação geral se manteve.' : `Pontuação geral: ${geral > 0 ? '+' : ''}${geral} pontos.`
-  return `Maior avanço: ${dominioNome(melhor.d)}, +${melhor.delta} pontos. ${g}`
+  const g = geral === 0 ? t('avanco.geralIgual') : t('avanco.geral', { n: `${geral > 0 ? '+' : ''}${geral}` })
+  return t('avanco.maior', { dominio: dominioNome(melhor.d), n: melhor.delta, geral: g })
 }
 
 export const porData = (a: Avaliacao, b: Avaliacao) => a.data.localeCompare(b.data) || a.criadoEm.localeCompare(b.criadoEm)
