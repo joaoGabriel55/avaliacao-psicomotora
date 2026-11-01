@@ -3,6 +3,7 @@ import {
   type ChartConfiguration, type Plugin,
 } from 'chart.js'
 import { DOMINIOS, faixaPorId, formatarData, pontuar, type Avaliacao } from './domain'
+import { temaAtual } from './tema'
 
 Chart.register(LineController, LineElement, PointElement, BarController, BarElement, LinearScale, CategoryScale, Legend, Tooltip)
 
@@ -26,7 +27,7 @@ const folhaDeCurva: Plugin = {
       ctx.fillStyle = (v / 10) % 2 === 0 ? 'rgba(46, 148, 103, 0.075)' : 'rgba(242, 182, 48, 0.07)'
       ctx.fillRect(a.left, top, a.right - a.left, bottom - top)
     }
-    ctx.strokeStyle = 'rgba(30, 95, 140, 0.09)'
+    ctx.strokeStyle = temaAtual().base + '17' // ~9% alpha
     ctx.lineWidth = 1
     const fino = a.right - a.left >= 640 // fine grid only where it reads as paper, not hatching
     for (let v = fino ? 2 : 10; v < 100; v += fino ? 2 : 10) {
@@ -52,7 +53,7 @@ const faixasImpressas = (segs: { de: number; ate: number; faixa: string; rotulo:
     segs.forEach((sg, i) => {
       const x0 = i === 0 ? a.left : x(sg.de)
       const x1 = i === segs.length - 1 ? a.right : x(sg.ate)
-      ctx.fillStyle = i % 2 === 0 ? '#1e5f8c' : '#154a6e'
+      ctx.fillStyle = i % 2 === 0 ? temaAtual().base : temaAtual().deep
       ctx.fillRect(x0, a.top - 26, x1 - x0, 20)
       ctx.fillStyle = '#fff'
       ctx.font = `800 11px ${FONT}`
@@ -148,7 +149,7 @@ export function configEvolucao(avs: Avaliacao[], opts: { estatico?: boolean } = 
         y: {
           min: 0, max: 100,
           ticks: { stepSize: 20, callback: (v) => `${v}%`, color: INK_SOFT, font: { family: FONT, size: 12 } },
-          grid: { color: 'rgba(30, 95, 140, 0.24)' },
+          grid: { color: temaAtual().base + '3d' }, // ~24% alpha
           border: { display: false },
         },
       },
@@ -168,10 +169,11 @@ export function configEvolucao(avs: Avaliacao[], opts: { estatico?: boolean } = 
   }
 }
 
-/** Light → strong ramp of caderneta blue, oldest first. */
+/** Light → strong ramp of the theme colour, oldest first. */
 export function rampa(n: number): string[] {
-  const claro = [104, 146, 184] // ≥3:1 on white so the oldest bar stays visible
-  const forte = [20, 74, 112]
+  const rgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
+  const claro = rgb(temaAtual().claro)
+  const forte = rgb(temaAtual().deep)
   return Array.from({ length: n }, (_, i) => {
     const t = n === 1 ? 1 : i / (n - 1)
     const c = claro.map((v, k) => Math.round(v + (forte[k] - v) * t))

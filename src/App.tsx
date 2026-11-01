@@ -2,7 +2,9 @@ import { HashRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { DatabaseBackup, Settings, Users, WifiOff, TriangleAlert } from 'lucide-react'
 import { db, lerConfig } from './lib/db'
+import { useEffect } from 'react'
 import { Logo, Toaster } from './components/ui'
+import { aplicarTema } from './lib/tema'
 import Pacientes from './pages/Pacientes'
 import PacienteForm from './pages/PacienteForm'
 import PacientePage from './pages/Paciente'
@@ -29,6 +31,8 @@ function LembreteBackup() {
 }
 
 export default function App() {
+  const corTema = useLiveQuery(async () => (await lerConfig()).corTema ?? '')
+  useEffect(() => { if (corTema !== undefined) aplicarTema(corTema || undefined) }, [corTema])
   return (
     <HashRouter>
       <div className="shell">

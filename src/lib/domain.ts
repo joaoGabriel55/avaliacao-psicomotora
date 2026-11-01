@@ -60,6 +60,7 @@ export interface Configuracoes {
   registro: string
   contato: string
   logo?: string // data URL
+  corTema?: string // '#rrggbb'; app + PDF cover colour, see lib/tema.ts
   concluidasNoUltimoBackup: number
 }
 
