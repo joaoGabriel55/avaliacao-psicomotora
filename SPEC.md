@@ -280,7 +280,7 @@ O MVP é um app web instalável (PWA) que funciona offline, guarda tudo no próp
 - Funciona sem internet depois do primeiro acesso; instalável em celular, tablet e computador.
 - Nenhum dado sai do dispositivo. Limpar os dados do navegador apaga tudo, então o app lembra de fazer backup a cada 5 avaliações concluídas.
 - Botões grandes para uso em tablet durante a sessão; uma avaliação preenchida em até 10 minutos.
-- Interface e PDF em português do Brasil.
+- Interface e PDF em português do Brasil, inglês ou espanhol (escolhido em Configurações).
 - PDF gerado em até 10 segundos.
 
 ### Stack sugerida

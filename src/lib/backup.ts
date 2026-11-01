@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { db, lerConfig, CONFIG_PADRAO } from './db'
+import { t } from '../i18n'
 
 const data = z.string().regex(/^\d{4}-\d{2}-\d{2}/)
 const resposta = z.union([z.literal(0), z.literal(1), z.literal(2)])
@@ -38,6 +39,7 @@ const config = z.object({
   contato: z.string(),
   logo: z.string().optional(),
   corTema: z.string().regex(/^#[0-9a-f]{6}$/i).optional(),
+  idioma: z.enum(['pt', 'en', 'es']).optional(),
   concluidasNoUltimoBackup: z.number().int().default(0),
 })
 
@@ -71,10 +73,10 @@ export function lerBackup(texto: string): Backup {
   try {
     json = JSON.parse(texto)
   } catch {
-    throw new Error('O arquivo não é um JSON válido.')
+    throw new Error(t('backup.erroJson'))
   }
   const r = backupSchema.safeParse(json)
-  if (!r.success) throw new Error('O arquivo não é um backup deste app ou está corrompido.')
+  if (!r.success) throw new Error(t('backup.erroFormato'))
   return r.data
 }
 

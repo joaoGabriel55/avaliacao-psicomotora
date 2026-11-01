@@ -6,6 +6,7 @@ import { db, lerConfig } from '../lib/db'
 import { formatarData, pontuar, porData, type Avaliacao } from '../lib/domain'
 import { configBarras, configEvolucao, graficoComoImagem } from '../lib/charts'
 import { baixar } from '../lib/backup'
+import { t } from '../i18n'
 
 export default function Relatorio() {
   const { id = '' } = useParams()
@@ -60,64 +61,64 @@ export default function Relatorio() {
     <div className="page">
       <Link to={`/paciente/${id}`} className="back" style={{ color: 'var(--blue)' }}><ArrowLeft size={16} /> {paciente.nome}</Link>
       <header className="page-head" style={{ marginTop: 8 }}>
-        <div><h1>Relatório PDF</h1><p>Escolha as avaliações, revise o texto da mais recente e gere o PDF para os pais.</p></div>
+        <div><h1>{t('relatorio.titulo')}</h1><p>{t('relatorio.subtitulo')}</p></div>
       </header>
 
       <div className="report-grid">
         <div className="stack">
           <section className="sheet sheet-pad">
-            <div className="sheet-head"><h2>Avaliações incluídas</h2><p>{escolhidas.length} de {todas.length}</p></div>
+            <div className="sheet-head"><h2>{t('relatorio.incluidas')}</h2><p>{t('relatorio.nDeTotal', { n: escolhidas.length, total: todas.length })}</p></div>
             <ul className="checks">
               {[...todas].reverse().map((a) => (
                 <li key={a.id}>
                   <label className="check">
                     <input type="checkbox" checked={selecao.has(a.id)} onChange={() => alternar(a.id)} />
-                    <span style={{ flex: 1 }}><b>{formatarData(a.data)}</b> <span className="muted small">· Faixa {a.faixa}</span></span>
+                    <span style={{ flex: 1 }}><b>{formatarData(a.data)}</b> <span className="muted small">· {t('comum.faixa', { id: a.faixa })}</span></span>
                     <span className="badge badge-plain">{pontuar(a).geral}%</span>
                   </label>
                 </li>
               ))}
             </ul>
-            {escolhidas.length > 4 && <p className="small muted" style={{ marginTop: 8 }}>O gráfico de barras mostra só as 4 mais recentes da seleção; a linha de evolução usa todas.</p>}
+            {escolhidas.length > 4 && <p className="small muted" style={{ marginTop: 8 }}>{t('relatorio.barrasDica')}</p>}
           </section>
           {ultima && (
             <section className="sheet sheet-pad">
-              <div className="sheet-head"><h2>Texto do relatório</h2><p>Da avaliação de {formatarData(ultima.data)}</p></div>
+              <div className="sheet-head"><h2>{t('relatorio.texto')}</h2><p>{t('relatorio.daAvaliacao', { data: formatarData(ultima.data) })}</p></div>
               <div className="field">
-                <label htmlFor="r-obs">Observações gerais</label>
+                <label htmlFor="r-obs">{t('comum.observacoesGerais')}</label>
                 <textarea id="r-obs" className="textarea" value={ultima.observacoes} onChange={(e) => editar('observacoes', e.target.value)} />
               </div>
               <div className="field">
-                <label htmlFor="r-rec">Recomendações</label>
+                <label htmlFor="r-rec">{t('comum.recomendacoes')}</label>
                 <textarea id="r-rec" className="textarea" style={{ minHeight: 180 }} value={ultima.recomendacoes} onChange={(e) => editar('recomendacoes', e.target.value)} />
-                <span className="hint">As alterações são salvas na avaliação. Observações por domínio são editadas na própria avaliação.</span>
+                <span className="hint">{t('relatorio.textoDica')}</span>
               </div>
             </section>
           )}
         </div>
 
         <section className="sheet sheet-pad report-preview">
-          <div className="sheet-head"><h2>PDF do relatório</h2>{arquivo && <p>{arquivo.nome}</p>}</div>
+          <div className="sheet-head"><h2>{t('relatorio.pdf')}</h2>{arquivo && <p>{arquivo.nome}</p>}</div>
           {escolhidas.length === 0 ? (
-            <div className="note"><Info size={18} />Selecione ao menos uma avaliação.</div>
+            <div className="note"><Info size={18} />{t('relatorio.selecione')}</div>
           ) : arquivo ? (
             <>
-              <iframe className="preview" src={arquivo.url} title="Pré-visualização do relatório" />
+              <iframe className="preview" src={arquivo.url} title={t('relatorio.previa')} />
               {/* Phone browsers don't render PDFs inside an iframe; offer opening it instead. */}
-              <div className="note only-mobile"><FileText size={18} />PDF pronto. Abra para conferir ou baixe para enviar.</div>
+              <div className="note only-mobile"><FileText size={18} />{t('relatorio.pronto')}</div>
               <div className="form-actions report-actions">
-                <button className="btn" onClick={gerar}>Gerar de novo</button>
-                <a className="btn only-mobile" href={arquivo.url} target="_blank" rel="noopener"><ExternalLink size={18} /> Abrir PDF</a>
-                <button className="btn btn-primary" onClick={() => baixar(arquivo.blob, arquivo.nome)}><Download size={18} /> Baixar PDF</button>
+                <button className="btn" onClick={gerar}>{t('relatorio.gerarNovo')}</button>
+                <a className="btn only-mobile" href={arquivo.url} target="_blank" rel="noopener"><ExternalLink size={18} /> {t('relatorio.abrir')}</a>
+                <button className="btn btn-primary" onClick={() => baixar(arquivo.blob, arquivo.nome)}><Download size={18} /> {t('relatorio.baixar')}</button>
               </div>
             </>
           ) : (
             <div className="empty" style={{ padding: '40px 12px' }}>
               <FileText size={40} color="var(--blue)" />
-              <p>7 seções em A4: capa, como ler, evolução, comparativo, item a item, observações e recomendações.</p>
-              {estado === 'erro' && <p className="error-text" role="alert">Não foi possível gerar o PDF. Tente de novo; se persistir, recarregue o app.</p>}
+              <p>{t('relatorio.secoes')}</p>
+              {estado === 'erro' && <p className="error-text" role="alert">{t('relatorio.erro')}</p>}
               <button className="btn btn-primary" onClick={gerar} disabled={estado === 'gerando'}>
-                {estado === 'gerando' ? <><LoaderCircle size={18} className="spin" /> Gerando…</> : <><FileText size={18} /> Gerar PDF</>}
+                {estado === 'gerando' ? <><LoaderCircle size={18} className="spin" /> {t('relatorio.gerando')}</> : <><FileText size={18} /> {t('relatorio.gerar')}</>}
               </button>
             </div>
           )}

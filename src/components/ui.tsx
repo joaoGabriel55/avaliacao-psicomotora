@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Chart, type ChartConfiguration } from 'chart.js'
 import type { Resposta } from '../lib/domain'
+import { t } from '../i18n'
 
 /** Answer marks: shape carries the meaning, color reinforces it. */
 export function Marca({ valor, size = 26 }: { valor: Resposta | undefined; size?: number }) {
@@ -55,7 +56,7 @@ export function Grafico({ config, className }: { config: ChartConfiguration; cla
   }, [config])
   return (
     <div className={`chart-box ${className ?? ''}`}>
-      <canvas ref={ref} role="img" aria-label="Gráfico" />
+      <canvas ref={ref} role="img" aria-label={t('comum.grafico')} />
     </div>
   )
 }
@@ -77,7 +78,7 @@ export function Confirmar({ aberto, titulo, texto, acao, perigo, onConfirmar, on
         <h2 id="dlg-t">{titulo}</h2>
         <div className="muted">{texto}</div>
         <div className="form-actions">
-          <button className="btn" onClick={onCancelar} autoFocus>Cancelar</button>
+          <button className="btn" onClick={onCancelar} autoFocus>{t('comum.cancelar')}</button>
           <button className={`btn ${perigo ? 'btn-danger-solid' : 'btn-primary'}`} onClick={onConfirmar}>{acao}</button>
         </div>
       </div>

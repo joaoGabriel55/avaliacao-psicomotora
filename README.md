@@ -9,7 +9,7 @@ An offline-first Progressive Web App for a pediatric psychomotor therapist to ap
 - **Built for the session:** large three-option answer buttons (*Realiza / Em desenvolvimento / Não realiza*), auto-saved drafts, one screen per domain.
 - **Parent-ready PDF:** A4 report with cover, how-to-read guide, evolution chart, domain comparison, item-by-item table, observations and recommendations — generated in the browser.
 
-The interface and the PDF are in Brazilian Portuguese. The full functional spec is in [SPEC.md](SPEC.md).
+The interface and the PDF are available in Brazilian Portuguese, English and Spanish (Settings → Language). The full functional spec is in [SPEC.md](SPEC.md).
 
 > This is an internal clinical follow-up instrument, not a standardized or validated scale. Age milestones are references, not diagnostic norms.
 

@@ -4,6 +4,7 @@ import {
 } from 'chart.js'
 import { DOMINIOS, faixaPorId, formatarData, pontuar, type Avaliacao } from './domain'
 import { temaAtual } from './tema'
+import { t } from '../i18n'
 
 Chart.register(LineController, LineElement, PointElement, BarController, BarElement, LinearScale, CategoryScale, Legend, Tooltip)
 
@@ -58,7 +59,7 @@ const faixasImpressas = (segs: { de: number; ate: number; faixa: string; rotulo:
       ctx.fillStyle = '#fff'
       ctx.font = `800 11px ${FONT}`
       ctx.textAlign = 'left'
-      const label = x1 - x0 > 120 ? `Faixa ${sg.faixa} · ${sg.rotulo}` : `Faixa ${sg.faixa}`
+      const label = x1 - x0 > 120 ? `${t('comum.faixa', { id: sg.faixa })} · ${sg.rotulo}` : t('comum.faixa', { id: sg.faixa })
       ctx.fillText(label, x0 + 8, a.top - 12)
       if (i > 0) {
         ctx.setLineDash([6, 5]); ctx.strokeStyle = INK_SOFT; ctx.lineWidth = 1.5
@@ -117,7 +118,7 @@ export function configEvolucao(avs: Avaliacao[], opts: { estatico?: boolean } = 
           tension: 0,
         })),
         {
-          label: 'Geral',
+          label: t('comum.geral'),
           data: pts.map((p) => ({ x: p.x, y: p.p.geral })),
           borderColor: INK,
           backgroundColor: INK,

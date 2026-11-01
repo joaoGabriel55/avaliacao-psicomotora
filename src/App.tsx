@@ -5,6 +5,7 @@ import { db, lerConfig } from './lib/db'
 import { useEffect } from 'react'
 import { Logo, Toaster } from './components/ui'
 import { aplicarTema } from './lib/tema'
+import { definirIdioma, idiomaAtual, t } from './i18n'
 import Pacientes from './pages/Pacientes'
 import PacienteForm from './pages/PacienteForm'
 import PacientePage from './pages/Paciente'
@@ -23,32 +24,35 @@ function LembreteBackup() {
   return (
     <div className="banner" role="status">
       <div className="banner-in">
-        <span><TriangleAlert size={18} /> {pendentes} avaliações concluídas desde o último backup. Os dados só existem neste aparelho.</span>
-        <Link className="btn btn-sm btn-sun" to="/backup">Fazer backup</Link>
+        <span><TriangleAlert size={18} /> {t('app.lembreteBackup', { n: pendentes })}</span>
+        <Link className="btn btn-sm btn-sun" to="/backup">{t('app.fazerBackup')}</Link>
       </div>
     </div>
   )
 }
 
 export default function App() {
-  const corTema = useLiveQuery(async () => (await lerConfig()).corTema ?? '')
+  const cfg = useLiveQuery(lerConfig)
+  const corTema = cfg ? cfg.corTema ?? '' : undefined
   useEffect(() => { if (corTema !== undefined) aplicarTema(corTema || undefined) }, [corTema])
+  // Set before children render so every t() call below reads the chosen language.
+  definirIdioma(cfg?.idioma)
   return (
     <HashRouter>
-      <div className="shell">
+      <div className="shell" key={idiomaAtual()}>
         <aside className="rail">
           <div className="rail-brand">
             <Logo />
-            <div><strong>Avaliação Psicomotora</strong><span>0 a 15 anos</span></div>
+            <div><strong>{t('app.nome')}</strong><span>{t('app.faixaEtaria')}</span></div>
           </div>
-          <nav aria-label="Principal">
+          <nav aria-label={t('app.navPrincipal')}>
             <NavLink to="/" end className={({ isActive }) => (isActive || location.hash.startsWith('#/paciente') || location.hash.startsWith('#/avaliacao') ? 'active' : '')}>
-              <Users size={20} /> Pacientes
+              <Users size={20} /> {t('pacientes.titulo')}
             </NavLink>
-            <NavLink to="/backup"><DatabaseBackup size={20} /> Backup</NavLink>
-            <NavLink to="/configuracoes"><Settings size={20} /> Configurações</NavLink>
+            <NavLink to="/backup"><DatabaseBackup size={20} /> {t('backup.titulo')}</NavLink>
+            <NavLink to="/configuracoes"><Settings size={20} /> {t('config.titulo')}</NavLink>
           </nav>
-          <p className="rail-foot"><WifiOff size={13} />Funciona sem internet. Os dados ficam só neste aparelho.</p>
+          <p className="rail-foot"><WifiOff size={13} />{t('app.offline')}</p>
         </aside>
         <main className="main">
           <LembreteBackup />
@@ -62,7 +66,7 @@ export default function App() {
             <Route path="/avaliacao/:id" element={<AvaliacaoPage />} />
             <Route path="/backup" element={<Backup />} />
             <Route path="/configuracoes" element={<Config />} />
-            <Route path="*" element={<div className="page"><h1>Página não encontrada</h1><p><Link to="/">Voltar aos pacientes</Link></p></div>} />
+            <Route path="*" element={<div className="page"><h1>{t('app.naoEncontrada')}</h1><p><Link to="/">{t('comum.voltarPacientes')}</Link></p></div>} />
           </Routes>
         </main>
       </div>

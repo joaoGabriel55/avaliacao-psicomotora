@@ -1,5 +1,6 @@
 import { Document, Image, Page, StyleSheet, Svg, Circle, Path, Text, View, pdf } from '@react-pdf/renderer'
 import { paleta } from '../lib/tema'
+import { locale, t } from '../i18n'
 import { DOMINIOS, RESPOSTAS, faixaPorId, formatarData, formatarIdade, hoje, idadeEmMeses, maiorAvanco, pontuar, type Avaliacao, type Configuracoes, type Paciente, type Resposta } from '../lib/domain'
 
 const INK = '#1B2B36'
@@ -53,8 +54,8 @@ const curto = (v: Resposta | undefined) => (v === undefined ? '—' : RESPOSTAS.
 function Rodape({ emissao }: { emissao: string }) {
   return (
     <View style={base.footer} fixed>
-      <Text>Avaliação Psicomotora · emitido em {emissao}</Text>
-      <Text render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`} />
+      <Text>{t('pdf.rodape', { data: emissao })}</Text>
+      <Text render={({ pageNumber, totalPages }) => t('pdf.pagina', { n: pageNumber, total: totalPages })} />
     </View>
   )
 }
@@ -84,23 +85,23 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
   }
 
   return (
-    <Document title={`Relatório — ${paciente.nome}`} author={config.nomeTerapeuta || undefined} language="pt-BR">
+    <Document title={t('pdf.tituloDoc', { nome: paciente.nome })} author={config.nomeTerapeuta || undefined} language={locale()}>
       {/* 1. Capa */}
       <Page size="A4" style={s.page}>
         <View style={s.coverBand}>
-          <Text style={s.coverTitle}>RELATÓRIO DE AVALIAÇÃO PSICOMOTORA</Text>
+          <Text style={s.coverTitle}>{t('pdf.capa')}</Text>
           <Text style={s.coverName}>{paciente.nome}</Text>
         </View>
         <View style={s.idgrid}>
-          <View style={s.idcell}><Text style={s.idlabel}>Data de nascimento</Text><Text style={s.idvalue}>{formatarData(paciente.dataNascimento)}</Text></View>
-          <View style={s.idcell}><Text style={s.idlabel}>Idade atual</Text><Text style={s.idvalue}>{formatarIdade(idadeEmMeses(paciente.dataNascimento, hoje()))}</Text></View>
-          <View style={s.idcell}><Text style={s.idlabel}>Período coberto</Text><Text style={s.idvalue}>{formatarData(avaliacoes[0].data)}{avaliacoes.length > 1 ? ` a ${formatarData(ultima.data)}` : ''}</Text></View>
-          <View style={s.idcell}><Text style={s.idlabel}>Avaliações</Text><Text style={s.idvalue}>{avaliacoes.length}</Text></View>
-          {paciente.responsavel && <View style={[s.idcell, { width: '100%' }]}><Text style={s.idlabel}>Responsável</Text><Text style={s.idvalue}>{paciente.responsavel}</Text></View>}
+          <View style={s.idcell}><Text style={s.idlabel}>{t('comum.dataNascimento')}</Text><Text style={s.idvalue}>{formatarData(paciente.dataNascimento)}</Text></View>
+          <View style={s.idcell}><Text style={s.idlabel}>{t('pdf.idadeAtual')}</Text><Text style={s.idvalue}>{formatarIdade(idadeEmMeses(paciente.dataNascimento, hoje()))}</Text></View>
+          <View style={s.idcell}><Text style={s.idlabel}>{t('pdf.periodo')}</Text><Text style={s.idvalue}>{avaliacoes.length > 1 ? t('comum.periodo', { de: formatarData(avaliacoes[0].data), ate: formatarData(ultima.data) }) : formatarData(ultima.data)}</Text></View>
+          <View style={s.idcell}><Text style={s.idlabel}>{t('comum.avaliacoes')}</Text><Text style={s.idvalue}>{avaliacoes.length}</Text></View>
+          {paciente.responsavel && <View style={[s.idcell, { width: '100%' }]}><Text style={s.idlabel}>{t('comum.responsavel')}</Text><Text style={s.idvalue}>{paciente.responsavel}</Text></View>}
         </View>
         <View style={{ marginTop: 'auto', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <View>
-            <Text style={s.idlabel}>Terapeuta</Text>
+            <Text style={s.idlabel}>{t('pdf.terapeuta')}</Text>
             <Text style={s.idvalue}>{config.nomeTerapeuta || '—'}</Text>
             {config.registro ? <Text style={{ color: INK2 }}>{config.registro}</Text> : null}
             {config.contato ? <Text style={{ color: INK2 }}>{config.contato}</Text> : null}
@@ -112,25 +113,21 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
 
       {/* 2. Como ler */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Como ler este relatório</Text>
-        <Text style={s.lead}>Durante a avaliação, a terapeuta observa a criança em atividades do dia a dia e de brincadeira, organizadas em sete áreas do movimento.</Text>
-        <Text style={s.h2}>Cada atividade recebe uma de três respostas</Text>
+        <Text style={s.h1}>{t('pdf.comoLer')}</Text>
+        <Text style={s.lead}>{t('pdf.comoLerLead')}</Text>
+        <Text style={s.h2}>{t('pdf.respostasTitulo')}</Text>
         <View style={s.box}>
-          {[
-            [2, 'Realiza', 'a criança faz a atividade sozinha e com segurança (2 pontos).'],
-            [1, 'Em desenvolvimento', 'a criança tenta, faz em parte ou precisa de ajuda (1 ponto).'],
-            [0, 'Não realiza', 'a criança ainda não consegue fazer (0 ponto).'],
-          ].map(([v, t, d]) => (
-            <View key={String(v)} style={s.legendRow}>
-              <Marca v={v as Resposta} size={13} />
-              <Text style={{ marginLeft: 8 }}><Text style={{ fontFamily: 'Helvetica-Bold' }}>{t}:</Text> {d}</Text>
+          {RESPOSTAS.map((r) => (
+            <View key={r.valor} style={s.legendRow}>
+              <Marca v={r.valor} size={13} />
+              <Text style={{ marginLeft: 8 }}><Text style={{ fontFamily: 'Helvetica-Bold' }}>{r.rotulo}:</Text> {t(`pdf.resposta.${r.valor}`)}</Text>
             </View>
           ))}
         </View>
-        <Text style={s.h2}>O que significa o percentual</Text>
-        <Text style={s.p}>Em cada área, somamos os pontos e comparamos com o máximo possível. 100% quer dizer que a criança realiza todas as atividades daquela área; 50% quer dizer que ela está na metade do caminho. A pontuação geral é a média das sete áreas.</Text>
-        <Text style={s.p}>As atividades mudam conforme a idade (faixas de 0 a 2, 2 a 4, 4 a 6, 6 a 9 e 9 a 15 anos). Por isso usamos percentuais: assim dá para comparar avaliações mesmo quando a criança passa para outra faixa.</Text>
-        <Text style={s.h2}>As sete áreas</Text>
+        <Text style={s.h2}>{t('pdf.percentualTitulo')}</Text>
+        <Text style={s.p}>{t('pdf.percentual1')}</Text>
+        <Text style={s.p}>{t('pdf.percentual2')}</Text>
+        <Text style={s.h2}>{t('pdf.areas')}</Text>
         {DOMINIOS.map((d) => (
           <View key={d.id} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
             <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: d.cor, marginRight: 8 }} />
@@ -138,38 +135,38 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
           </View>
         ))}
         <View style={[s.box, { marginTop: 18 }]}>
-          <Text style={{ fontFamily: 'Helvetica-Bold', marginBottom: 3 }}>Importante</Text>
-          <Text>Este é um instrumento de acompanhamento clínico interno, não uma escala padronizada e validada. Os marcos de idade são referências e não servem como diagnóstico. Converse com a terapeuta sobre qualquer dúvida.</Text>
+          <Text style={{ fontFamily: 'Helvetica-Bold', marginBottom: 3 }}>{t('pdf.importante')}</Text>
+          <Text>{t('pdf.importanteTexto')}</Text>
         </View>
         <Rodape emissao={emissao} />
       </Page>
 
       {/* 3. Evolução */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Evolução</Text>
+        <Text style={s.h1}>{t('painel.evolucao')}</Text>
         {graficoEvolucao ? (
           <>
             <Text style={s.lead}>{maiorAvanco(avaliacoes)}</Text>
             <Image src={graficoEvolucao} style={s.chart} />
-            <Text style={{ color: INK2, fontSize: 9, marginTop: 6 }}>Cada linha colorida é uma área; a linha preta mais grossa é a pontuação geral. A linha tracejada marca quando a faixa de idade mudou.</Text>
+            <Text style={{ color: INK2, fontSize: 9, marginTop: 6 }}>{t('pdf.evolucaoDica')}</Text>
           </>
         ) : (
-          <View style={s.box}><Text>A linha de evolução aparece a partir da segunda avaliação. Este relatório inclui uma avaliação, de {formatarData(ultima.data)}.</Text></View>
+          <View style={s.box}><Text>{t('pdf.evolucaoVazia', { data: formatarData(ultima.data) })}</Text></View>
         )}
         <Rodape emissao={emissao} />
       </Page>
 
       {/* 4. Comparativo */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Comparativo por área</Text>
-        <Text style={s.lead}>{nBarras === 1 ? `Percentual por área na avaliação de ${formatarData(ultima.data)}.` : `As ${nBarras} avaliações mais recentes, da mais antiga (tom claro) à mais recente (tom forte).`}</Text>
+        <Text style={s.h1}>{t('pdf.comparativo')}</Text>
+        <Text style={s.lead}>{nBarras === 1 ? t('pdf.comparativo1', { data: formatarData(ultima.data) }) : t('pdf.comparativoN', { n: nBarras })}</Text>
         <Image src={graficoBarras} style={s.chart} />
         <View style={[s.table, { marginTop: 16 }]}>
           <View style={[s.tr, { borderTopWidth: 0 }]}>
-            <Text style={[s.tdItem, s.th]}>Área</Text>
+            <Text style={[s.tdItem, s.th]}>{t('pdf.area')}</Text>
             {avaliacoes.slice(-nBarras).map((a) => <Text key={a.id} style={[s.tdCell, s.th]}>{formatarData(a.data)}</Text>)}
           </View>
-          {[...DOMINIOS, { id: 'geral' as const, nome: 'Geral' }].map((d) => (
+          {[...DOMINIOS, { id: 'geral' as const, nome: t('comum.geral') }].map((d) => (
             <View key={d.id} style={s.tr}>
               <Text style={[s.tdItem, d.id === 'geral' ? { fontFamily: 'Helvetica-Bold' } : {}]}>{d.nome}</Text>
               {avaliacoes.slice(-nBarras).map((a) => <Text key={a.id} style={[s.tdCell, { fontFamily: 'Helvetica-Bold' }]}>{pontuar(a)[d.id]}%</Text>)}
@@ -181,11 +178,11 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
 
       {/* 5. Item a item */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Item a item</Text>
-        <Text style={s.lead}>Respostas da avaliação mais recente ({formatarData(ultima.data)}, faixa {ultima.faixa}: {faixa.rotulo}){anteriores.length ? ', ao lado das anteriores quando a atividade é a mesma' : ''}.</Text>
+        <Text style={s.h1}>{t('pdf.itemAItem')}</Text>
+        <Text style={s.lead}>{t(anteriores.length ? 'pdf.itemLeadAnteriores' : 'pdf.itemLead', { data: formatarData(ultima.data), faixa: ultima.faixa, rotulo: faixa.rotulo })}</Text>
         <View style={s.table}>
           <View style={[s.tr, { borderTopWidth: 0 }]} fixed>
-            <Text style={[s.tdItem, s.th]}>Atividade</Text>
+            <Text style={[s.tdItem, s.th]}>{t('pdf.atividade')}</Text>
             {anteriores.map((a) => <Text key={a.id} style={[s.tdCell, s.th]}>{formatarData(a.data)}</Text>)}
             <Text style={[s.tdCell, s.th, { color: INK }]}>{formatarData(ultima.data)}</Text>
           </View>
@@ -212,16 +209,16 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
             </View>
           ))}
         </View>
-        {anteriores.length > 0 && <Text style={{ color: INK2, fontSize: 8.5 }}>— indica que a atividade não fez parte daquela avaliação (outra faixa de idade).</Text>}
+        {anteriores.length > 0 && <Text style={{ color: INK2, fontSize: 8.5 }}>{t('pdf.traco')}</Text>}
         <Rodape emissao={emissao} />
       </Page>
 
       {/* 6. Observações */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Observações</Text>
-        <Text style={s.lead}>Avaliação de {formatarData(ultima.data)}.</Text>
-        <Text style={s.h2}>Gerais</Text>
-        <Text style={s.p}>{ultima.observacoes.trim() || 'Sem observações gerais.'}</Text>
+        <Text style={s.h1}>{t('pdf.observacoes')}</Text>
+        <Text style={s.lead}>{t('pdf.avaliacaoDe', { data: formatarData(ultima.data) })}</Text>
+        <Text style={s.h2}>{t('pdf.gerais')}</Text>
+        <Text style={s.p}>{ultima.observacoes.trim() || t('pdf.semObservacoes')}</Text>
         {DOMINIOS.filter((d) => ultima.obsDominio[d.id]?.trim()).map((d) => (
           <View key={d.id} wrap={false}>
             <Text style={s.h2}>{d.nome}</Text>
@@ -233,10 +230,10 @@ function Relatorio({ paciente, avaliacoes, config, graficoEvolucao, graficoBarra
 
       {/* 7. Recomendações */}
       <Page size="A4" style={s.page}>
-        <Text style={s.h1}>Recomendações</Text>
-        <Text style={[s.p, { fontSize: 11.5 }]}>{ultima.recomendacoes.trim() || 'Sem recomendações registradas.'}</Text>
+        <Text style={s.h1}>{t('comum.recomendacoes')}</Text>
+        <Text style={[s.p, { fontSize: 11.5 }]}>{ultima.recomendacoes.trim() || t('pdf.semRecomendacoes')}</Text>
         <View style={{ marginTop: 40, borderTopWidth: 0.75, borderTopColor: INK, width: 220, paddingTop: 6 }}>
-          <Text style={{ fontFamily: 'Helvetica-Bold' }}>{config.nomeTerapeuta || 'Terapeuta'}</Text>
+          <Text style={{ fontFamily: 'Helvetica-Bold' }}>{config.nomeTerapeuta || t('pdf.terapeuta')}</Text>
           {config.registro ? <Text style={{ color: INK2 }}>{config.registro}</Text> : null}
         </View>
         <Rodape emissao={emissao} />
@@ -250,5 +247,5 @@ export const gerarPdf = (d: DadosRelatorio) => pdf(<Relatorio {...d} />).toBlob(
 export function nomeArquivo(nome: string) {
   const limpo = nome.normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^A-Za-z0-9 ]/g, '').trim()
     .split(/\s+/).map((p) => p[0].toUpperCase() + p.slice(1)).join('')
-  return `Relatorio_${limpo || 'Paciente'}_${hoje()}.pdf`
+  return `${t('pdf.arquivo')}_${limpo || t('pdf.arquivoPaciente')}_${hoje()}.pdf`
 }

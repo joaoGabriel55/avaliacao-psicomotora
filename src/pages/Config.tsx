@@ -4,6 +4,7 @@ import { lerConfig, salvarConfig } from '../lib/db'
 import type { Configuracoes } from '../lib/domain'
 import { avisar } from '../components/ui'
 import { COR_PADRAO, TEMAS, corSegura } from '../lib/tema'
+import { IDIOMAS, idiomaAtual, t, type Idioma } from '../i18n'
 
 /** Downscale the logo so the PDF and backup stay small. */
 async function reduzirImagem(f: File, max = 600): Promise<string> {
@@ -31,40 +32,48 @@ export default function Config() {
 
   return (
     <div className="page page-narrow">
-      <header className="page-head"><div><h1>Configurações</h1><p>Dados da terapeuta que aparecem na capa e no fim do relatório.</p></div></header>
-      <form className="sheet sheet-pad" onSubmit={async (e) => { e.preventDefault(); await salvarConfig(c); avisar('Configurações salvas.') }}>
+      <header className="page-head"><div><h1>{t('config.titulo')}</h1><p>{t('config.subtitulo')}</p></div></header>
+      <form className="sheet sheet-pad" onSubmit={async (e) => { e.preventDefault(); await salvarConfig(c); avisar(t('config.salvas')) }}>
         <div className="field">
-          <label htmlFor="nome">Nome da terapeuta</label>
+          <label htmlFor="idioma">{t('config.idioma')}</label>
+          <p className="hint">{t('config.idiomaDica')}</p>
+          {/* Saved at once, like the colour: App re-renders in the new language. */}
+          <select id="idioma" className="input" style={{ maxWidth: 280 }} value={c.idioma ?? idiomaAtual()} onChange={(e) => { const idioma = e.target.value as Idioma; set({ idioma }); salvarConfig({ idioma }) }}>
+            {Object.entries(IDIOMAS).map(([id, nome]) => <option key={id} value={id}>{nome}</option>)}
+          </select>
+        </div>
+        <div className="field" style={{ marginTop: 18 }}>
+          <label htmlFor="nome">{t('config.nome')}</label>
           <input id="nome" className="input" value={c.nomeTerapeuta} onChange={(e) => set({ nomeTerapeuta: e.target.value })} />
         </div>
         <div className="grid-2" style={{ marginTop: 18 }}>
           <div className="field">
-            <label htmlFor="reg">Registro profissional</label>
-            <input id="reg" className="input" placeholder="Ex.: CREFITO 0-000000-F" value={c.registro} onChange={(e) => set({ registro: e.target.value })} />
+            <label htmlFor="reg">{t('config.registro')}</label>
+            <input id="reg" className="input" placeholder={t('config.registroDica')} value={c.registro} onChange={(e) => set({ registro: e.target.value })} />
           </div>
           <div className="field">
-            <label htmlFor="cont">Contato</label>
-            <input id="cont" className="input" placeholder="Telefone ou e-mail" value={c.contato} onChange={(e) => set({ contato: e.target.value })} />
+            <label htmlFor="cont">{t('config.contato')}</label>
+            <input id="cont" className="input" placeholder={t('config.contatoDica')} value={c.contato} onChange={(e) => set({ contato: e.target.value })} />
           </div>
         </div>
         <div className="field" style={{ marginTop: 18 }}>
-          <span className="label">Logo para o PDF</span>
+          <span className="label">{t('config.logo')}</span>
           <div className="row">
-            <div className="logo-prev">{c.logo ? <img src={c.logo} alt="Logo atual" /> : 'Sem logo'}</div>
+            <div className="logo-prev">{c.logo ? <img src={c.logo} alt={t('config.logoAtual')} /> : t('config.semLogo')}</div>
             <input ref={inp} type="file" accept="image/*" hidden onChange={async (e) => {
               const f = e.target.files?.[0]
               setErro('')
-              if (f) { try { set({ logo: await reduzirImagem(f) }) } catch { setErro('Não foi possível ler esta imagem. Use PNG ou JPG.') } }
+              if (f) { try { set({ logo: await reduzirImagem(f) }) } catch { setErro(t('config.erroImagem')) } }
               e.target.value = ''
             }} />
-            <button type="button" className="btn btn-sm" onClick={() => inp.current?.click()}><ImageUp size={16} /> {c.logo ? 'Trocar' : 'Escolher imagem'}</button>
-            {c.logo && <button type="button" className="btn btn-sm btn-ghost btn-danger" onClick={() => set({ logo: undefined })}><Trash2 size={16} /> Remover</button>}
+            <button type="button" className="btn btn-sm" onClick={() => inp.current?.click()}><ImageUp size={16} /> {t(c.logo ? 'config.trocar' : 'config.escolherImagem')}</button>
+            {c.logo && <button type="button" className="btn btn-sm btn-ghost btn-danger" onClick={() => set({ logo: undefined })}><Trash2 size={16} /> {t('config.remover')}</button>}
           </div>
           {erro && <p className="error-text" role="alert">{erro}</p>}
         </div>
         <div className="field" style={{ marginTop: 18 }}>
-          <span className="label" id="tema-label">Cor do tema</span>
-          <p className="hint">Usada no app e no relatório em PDF.</p>
+          <span className="label" id="tema-label">{t('config.cor')}</span>
+          <p className="hint">{t('config.corDica')}</p>
           <div className="swatches" role="radiogroup" aria-labelledby="tema-label">
             {TEMAS.map((t) => (
               <button key={t.cor} type="button" role="radio" aria-checked={cor === t.cor} className="swatch" onClick={() => setCor(t.cor)}>
@@ -75,13 +84,13 @@ export default function Config() {
               <span className="swatch-dot" style={{ background: personalizada ? cor : 'conic-gradient(#a33a66, #a3472a, #2f6b3a, #1d6b6b, #1e5f8c, #5b4391, #a33a66)' }}>
                 {personalizada ? <Check size={18} /> : <Palette size={18} />}
               </span>
-              Personalizada
-              <input type="color" className="visually-hidden" aria-label="Escolher cor personalizada" value={cor} onChange={(e) => setCor(corSegura(e.target.value))} />
+              {t('config.personalizada')}
+              <input type="color" className="visually-hidden" aria-label={t('config.personalizadaRotulo')} value={cor} onChange={(e) => setCor(corSegura(e.target.value))} />
             </label>
           </div>
-          {personalizada && <p className="hint">Cores claras são escurecidas automaticamente para o texto branco continuar legível.</p>}
+          {personalizada && <p className="hint">{t('config.personalizadaDica')}</p>}
         </div>
-        <div className="form-actions"><button className="btn btn-primary" type="submit">Salvar</button></div>
+        <div className="form-actions"><button className="btn btn-primary" type="submit">{t('comum.salvar')}</button></div>
       </form>
     </div>
   )
